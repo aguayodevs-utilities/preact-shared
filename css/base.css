@@ -1,0 +1,44 @@
+:root {
+  --app-color-primary: #4d4d4d;
+  --app-color-secondary: #bc0303;
+  --app-color-base: #4d4d4d;
+  --app-color-background: #1e1e1e;
+  --app-color-text: #595562;
+  --app-color-text-secondary: #15323e;
+  --app-color-text-error: #8f1010;
+  --app-color-background-error: #dce8de;
+}
+
+body, html {
+  background-color: var(--app-color-background) !important;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  animation: pulseGlow 5s ease infinite;
+  background-size: 200% 200%;
+}
+/* 💡 Fondo dinámico: animación de degradado */
+@keyframes pulseGlow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* ✅ Logo de fondo fijo centrado con opacidad */
+body::before {
+  content: "";
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 420px;
+  height: 420px;
+  transform: translate(-50%, -50%);
+  background: url('img/logo.png') no-repeat center center;
+  background-size: contain;
+  opacity: 0.15;
+  z-index: 0;
+  pointer-events: none;
+}
