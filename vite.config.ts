@@ -1,3 +1,5 @@
+
+
 import { defineConfig } from 'vite';
 import preact from '@preact/preset-vite';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
@@ -8,8 +10,8 @@ export default defineConfig({
     preact(),
     viteStaticCopy({
       targets: [
-        { src: 'img', dest: 'static' },
-        { src: 'css', dest: 'static' }
+        { src: 'src/assets/img', dest: 'static/img' }, // Updated path
+        { src: 'src/assets/css', dest: 'static/css' }  // Updated path
       ]
     })
   ],
@@ -26,12 +28,8 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     lib: {
-      entry: {
-        index: path.resolve(__dirname, 'index.tsx'),
-        Constants: path.resolve(__dirname, 'Constants.tsx'),
-        Hooks: path.resolve(__dirname, 'Hooks.tsx'),
-        Toast: path.resolve(__dirname, 'Toast.tsx'),
-        Interfaces: path.resolve(__dirname, 'Interfaces.tsx')
+      entry: { // Simplified entry points
+        index: path.resolve(__dirname, 'src/index.ts')
       },
       formats: ['es']
     },
