@@ -1,5 +1,3 @@
-
-
 import { defineConfig } from 'vite';
 import preact from '@preact/preset-vite';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
@@ -11,7 +9,7 @@ export default defineConfig({
     viteStaticCopy({
       targets: [
         { src: 'src/assets/img', dest: 'static/img' }, // Updated path
-        { src: 'src/assets/css', dest: 'static/css' }  // Updated path
+        { src: 'src/assets/css/*', dest: 'static/css' } // Copy contents of css folder
       ]
     })
   ],
