@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'preact/hooks'; // Changed to preact/hooks
+/// <reference types="vite/client" />
+import { useEffect, useState } from 'preact/hooks';
 import axios, { AxiosError } from 'axios';
 import { User } from '../interfaces/interface.user';
-import { appUrls, IEnvironment } from '../constants/appUrls'; // Assuming IEnvironment is correctly defined
+import { appUrls, IEnvironment } from '../constants/appUrls';
 
 /**
  * @interface UseUserSessionReturn
@@ -15,40 +16,62 @@ export interface UseUserSessionReturn {
   user: User | null;
   logout: () => void;
   isLoading: boolean;
-  error: AxiosError | Error | null; // More specific error typing
+  error: AxiosError | Error | null;
+}
+
+/**
+ * @interface UseUserSessionProps
+ * @description Defines the props for the `useUserSession` hook.
+ * @property {string} [sessionEndpointUrl] - Optional URL for fetching user session data.
+ * @property {string} [urlLogout] - Optional URL for logging out the user.
+ */
+export interface UseUserSessionProps {
+  sessionEndpointUrl?: string;
+  urlLogout?: string;
 }
 
 /**
  * @function useUserSession
  * @description A Preact hook to manage and retrieve the current user's session information.
- * It fetches the user session from an SSO endpoint on mount and provides user data,
- * a logout function, loading state, and error state.
+ * It fetches the user session from a specified endpoint on mount and provides user data,
+ * a logout function, loading state, and error state. If `sessionEndpointUrl` is not provided,
+ * no session fetch will occur.
  *
+ * @param {UseUserSessionProps} [props] - Props for the hook, including session and logout URLs.
  * @returns {UseUserSessionReturn} An object containing the user, logout function, loading state, and error state.
  *
  * @example
+ * // With custom session and logout URLs
+ * const { user, logout, isLoading, error } = useUserSession({
+ *   sessionEndpointUrl: '/auth/session',
+ *   logoutEndpointUrl: '/auth/logout'
+ * });
+ *
+ * // Without session fetching (e.g., for public pages)
  * const { user, logout, isLoading, error } = useUserSession();
- * if (isLoading) return <p>Loading session...</p>;
- * if (error) return <p>Error loading session: {error.message}</p>;
- * if (user) return <p>Welcome, {user.name}! <button onClick={logout}>Logout</button></p>;
- * return <p>Please log in.</p>;
  */
-export const useUserSession = (): UseUserSessionReturn => {
+export const useUserSession = ({ sessionEndpointUrl, urlLogout }: UseUserSessionProps = {}): UseUserSessionReturn => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<AxiosError | Error | null>(null);
-  
-  // Determine environment, ensuring it matches IEnvironment type
+
   const [environment] = useState<IEnvironment>(
-    process.env.NODE_ENV === "production" ? "production" : "development"
+    import.meta.env.MODE === "production" ? "production" : "development"
   );
 
+  const effectiveLogoutUrl = urlLogout || `${appUrls.getBase({ environment })}/sso/session/logout`;
+
   useEffect(() => {
-    let isMounted = true; // Flag to prevent state updates on unmounted component
+    let isMounted = true;
     setIsLoading(true);
     setError(null);
 
-    axios.get<{ user: User }>(`${appUrls.getBase({ environment })}/sso/session`, {
+    if (!sessionEndpointUrl) {
+      setIsLoading(false);
+      return;
+    }
+
+    axios.get<{ user: User }>(sessionEndpointUrl, {
       withCredentials: true,
     })
     .then(res => {
@@ -69,17 +92,12 @@ export const useUserSession = (): UseUserSessionReturn => {
     });
 
     return () => {
-      isMounted = false; // Cleanup function to set isMounted to false
+      isMounted = false;
     };
-  }, [environment]); // Re-fetch if environment changes, though typically it won't during component lifecycle
+  }, [environment, sessionEndpointUrl]);
 
-  /**
-   * @function handleLogout
-   * @description Redirects the user to the SSO logout endpoint.
-   */
   const handleLogout = (): void => {
-    // Consider making the logout URL configurable or part of appUrls
-    window.location.href = `${appUrls.getBase({ environment })}/sso/session/logout`;
+    window.location.href = effectiveLogoutUrl;
   };
 
   return { user, logout: handleLogout, isLoading, error };
