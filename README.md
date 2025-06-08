@@ -22,6 +22,7 @@ Asegúrate de instalar las siguientes dependencias obligatorias en tu proyecto:
 - `@mui/icons-material` (>=7.0.2)
 - `axios` (>=1.8.4)
 - `react-toastify` (>=11.0.5)
+- `vite` (>=5.0.0) (para el tipo `import.meta.env`)
 
 ## Uso
 
@@ -100,7 +101,11 @@ import {
 // Ejemplo de uso de Layout y ToastContainer
 function MyApp() {
   return (
-    <CustomLayout environment="development">
+    <CustomLayout
+      environment="development"
+      urlUser="/auth/session"
+      urlLogout="/auth/logout"
+    >
       {/* Contenido de tu página */}
       <ToastContainer />
     </CustomLayout>
@@ -131,6 +136,8 @@ El paquete está estructurado en los siguientes módulos principales, todos acce
     -   `appColors`: Objeto de paleta de colores.
     -   `appUrls`: Objeto con URLs base y un helper `getBase()`.
 -   **`interfaces`**: Definiciones de TypeScript para las entidades y props.
+    -   `NavbarProps`: Actualizada para incluir `urlUser` y `urlLogout`.
+    -   `CustomLayoutProps`: Actualizada para incluir `urlUser` y `urlLogout`.
 -   **`styles`**: Relacionado con el tema.
     -   `appTheme`: El tema de Material-UI preconfigurado.
 -   **`helpers`**: Funciones de utilidad.

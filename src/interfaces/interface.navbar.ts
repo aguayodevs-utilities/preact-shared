@@ -23,9 +23,17 @@ export interface NavbarProps {
    * for example, a "Development Mode" banner.
    */
   environment: NODE_ENV_TYPE;
-  // Consider adding other props if the Navbar becomes more configurable, e.g.:
-  // onLogoClick?: () => void;
-  // showUserProfile?: boolean;
-  // customMenuItems?: React.ReactNode[];
+  /**
+   * Optional URL for fetching user session data.
+   * If provided, the user session will be fetched from this endpoint.
+   * If not provided, no user session fetch will occur, and user-related components will not be displayed.
+   */
+  urlUser?: string;
+  /**
+   * Optional URL for logging out the user.
+   * If not provided, a default logout URL will be constructed based on the `urlUser` if it exists,
+   * or a generic logout path if `urlUser` is also not provided.
+   */
+  urlLogout?: string;
 }
 
