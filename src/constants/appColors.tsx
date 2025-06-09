@@ -75,8 +75,8 @@ export const appDeliveryColors: PaletteOptions = {
   divider: '#e0e0e0',           // Línea sutil entre componentes
 
   text: {
-    primary:   '#212121',       // Texto principal en gris muy oscuro
-    secondary: '#616161',       // Texto secundario gris medio
+    primary:   '#fa7147',       // Texto principal en gris muy oscuro
+    secondary: '#79ab53',       // Texto secundario gris medio
     disabled:  '#9e9e9e',       // Texto deshabilitado
   },
 
