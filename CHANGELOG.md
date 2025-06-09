@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.7] - 2025-06-08
+
+### Added
+
+-   `appDeliveryTheme` to `src/styles/CustomTheme.tsx`.
+
+### Changed
+
+-   Updated `README.md` to mention `appDeliveryTheme` as an exported theme.
+
 ## [1.0.6] - 2025-06-08
 
 ### Added

@@ -1,6 +1,6 @@
 import { createTheme, ThemeOptions } from '@mui/material/styles';
 // Adjusted import path assuming appColors is now at src/constants/appColors.tsx
-import { appColors } from '../constants/appColors';
+import { appColors, appDeliveryColors } from '../constants/appColors';
 
 /**
  * @constant appTheme
@@ -32,25 +32,8 @@ import { appColors } from '../constants/appColors';
  * // };
  */
 export const appTheme = createTheme({
-  palette: appColors,
-  // Future enhancements:
-  // typography: {
-  //   fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
-  //   // Define other typography variants if needed
-  // },
-  // spacing: 8, // Default spacing factor
-  // components: {
-  //   // Example: Default props for MuiButton
-  //   MuiButton: {
-  //     defaultProps: {
-  //       disableElevation: true,
-  //     },
-  //     styleOverrides: {
-  //       root: {
-  //         textTransform: 'none', // Buttons will not be uppercase by default
-  //       }
-  //     }
-  //   },
-  //   // Add other component overrides or default props
-  // }
-} as ThemeOptions); // Added ThemeOptions for better type checking during creation
+  palette: appColors
+} as ThemeOptions); 
+export const appDeliveryTheme = createTheme({
+  palette: appDeliveryColors
+} as ThemeOptions);

@@ -28,7 +28,7 @@ Asegúrate de instalar las siguientes dependencias obligatorias en tu proyecto:
 
 ### 1. Estilos Globales y Tema
 
-Este paquete exporta temas de Material-UI preconfigurados (`appTheme`, `appDeliveryColors`) y también incluye un archivo CSS base.
+Este paquete exporta temas de Material-UI preconfigurados (`appTheme`, `appDeliveryTheme`) y también incluye un archivo CSS base.
 
 **CSS Base:**
 Importa el CSS base en el punto de entrada principal de tu aplicación (por ejemplo, `main.tsx` o `app.tsx`):
@@ -48,7 +48,7 @@ Para usar el tema proporcionado (`appTheme`) o tu propio tema personalizado, env
 ```tsx
 // En tu componente raíz de la aplicación (ej: src/app.tsx)
 import { ThemeProvider } from '@mui/material/styles';
-import { appTheme, appDeliveryColors } from '@aguayodevs-utilities/preact-shared'; // O tu tema personalizado
+import { appTheme, appDeliveryTheme } from '@aguayodevs-utilities/preact-shared'; // O tu tema personalizado
 // ...otros imports y tu componente Layout o principal
 
 export function App() {
@@ -80,12 +80,13 @@ import {
   CustomTypography,
   // Tema (si deseas usarlo directamente)
   appTheme,
-  appDeliveryColors, // Nuevo tema de colores para Delivery
+  appDeliveryTheme, // Nuevo tema de Material-UI para Delivery
   // Hooks
   useUserSession,
   useBreadcrumbs,
   // Constantes
   appColors, // Paleta de colores usada en appTheme
+  appDeliveryColors, // Paleta de colores para appDeliveryTheme
   appUrls,   // URLs base de la aplicación
   // Helpers (funciones de Toast)
   customToast,
@@ -135,13 +136,14 @@ El paquete está estructurado en los siguientes módulos principales, todos acce
     -   `useUserSession`
 -   **`constants`**: Constantes de la aplicación.
     -   `appColors`: Objeto de paleta de colores principal.
-    -   `appDeliveryColors`: Nuevo objeto de paleta de colores para temas de Delivery.
+    -   `appDeliveryColors`: Objeto de paleta de colores para temas de Delivery.
     -   `appUrls`: Objeto con URLs base y un helper `getBase()`.
 -   **`interfaces`**: Definiciones de TypeScript para las entidades y props.
     -   `NavbarProps`: Actualizada para incluir `urlUser` y `urlLogout`.
     -   `CustomLayoutProps`: Actualizada para incluir `urlUser` y `urlLogout`.
 -   **`styles`**: Relacionado con el tema.
     -   `appTheme`: El tema de Material-UI preconfigurado.
+    -   `appDeliveryTheme`: Nuevo tema de Material-UI para Delivery.
 -   **`helpers`**: Funciones de utilidad.
     -   `customToast`, `toastSuccess`, `toastError`, `toastWarning`, `toastInfo` (basadas en `react-toastify`).
 -   **`react-toastify`**: Se reexportan todas las funcionalidades de `react-toastify`, incluyendo `ToastContainer`.
