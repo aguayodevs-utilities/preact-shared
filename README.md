@@ -22,7 +22,6 @@ Asegúrate de instalar las siguientes dependencias obligatorias en tu proyecto:
 - `@mui/icons-material` (>=7.0.2)
 - `axios` (>=1.8.4)
 - `react-toastify` (>=11.0.5)
-- `vite` (>=5.0.0) (para el tipo `import.meta.env`)
 
 ## Uso
 
@@ -155,9 +154,9 @@ En `package.json` se incluyen los siguientes comandos:
 | Comando                          | Descripción                                |
 | -------------------------------- | ------------------------------------------ |
 | `npm run build`                  | Construye el paquete para producción       |
-| `npm run build:dev`              | Construye en modo desarrollo               |
-| `npm run build&install`          | Instala dependencias y construye           |
-| `npm run build&install:dev`      | Instala y construye en modo desarrollo     |
+| `npm run build:dev`              | Construye en modo desarrollo |
+| `npm run build&install`          | Instala dependencias y construye |
+| `npm run build&install:dev`      | Instala y construye en modo desarrollo |
 | `npm run publish-preact-shared`  | Construye y publica el paquete             |
 
 ## Contribución

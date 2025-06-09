@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.8] - 2025-06-08
+
+### Changed
+
+-   Removed `cross-env` from `package.json` scripts to avoid issues with frontend projects not using `.env` files.
+
 ## [1.0.7] - 2025-06-08
 
 ### Added

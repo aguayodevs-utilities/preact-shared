@@ -4,9 +4,9 @@
   "main": "dist/index.mjs",
   "scripts": {
     "build": "vite build",
-    "build:dev": "cross-env NODE_ENV=development vite build",
+    "build:dev": "vite build",
     "build&install": "npm install && vite build",
-    "build&install:dev": "npm install && cross-env NODE_ENV=development vite build",
+    "build&install:dev": "npm install && vite build",
     "publish-preact-shared": "npm run build && npm publish --access=public"
   },
   "keywords": ["aguayodevs", "react-shared", "frontforge"],
