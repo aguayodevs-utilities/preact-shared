@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.0] - 2025-06-08
+
+### Changed
+
+-   Optimized user session logic in `CustomNavbar` and `CustomLayout`. `CustomNavbar` now receives `user`, `logout`, and `isLoading` as props, centralizing user session management in `CustomLayout`.
+-   `CustomLayout` now conditionally fetches user session data via `useUserSession` only when `urlUser` prop is provided, improving performance for public routes.
+
 ## [1.0.8] - 2025-06-08
 
 ### Changed

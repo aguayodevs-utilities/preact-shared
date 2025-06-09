@@ -104,8 +104,8 @@ function MyApp() {
   return (
     <CustomLayout
       environment="development"
-      urlUser="/auth/session"
-      urlLogout="/auth/logout"
+      urlUser="/auth/session" // Opcional: si se proporciona, activa la protección de ruta y la gestión de sesión
+      urlLogout="/auth/logout" // Opcional: endpoint para cierre de sesión
     >
       {/* Contenido de tu página */}
       <ToastContainer />
@@ -138,8 +138,8 @@ El paquete está estructurado en los siguientes módulos principales, todos acce
     -   `appDeliveryColors`: Objeto de paleta de colores para temas de Delivery.
     -   `appUrls`: Objeto con URLs base y un helper `getBase()`.
 -   **`interfaces`**: Definiciones de TypeScript para las entidades y props.
-    -   `NavbarProps`: Actualizada para incluir `urlUser` y `urlLogout`.
-    -   `CustomLayoutProps`: Actualizada para incluir `urlUser` y `urlLogout`.
+    -   `NavbarProps`: Ahora recibe directamente `user`, `logout`, e `isLoading` del hook `useUserSession` gestionado en `CustomLayout`.
+    -   `CustomLayoutProps`: Incluye `urlUser` (opcional, para activar la protección de ruta y gestión de sesión) y `urlLogout`.
 -   **`styles`**: Relacionado con el tema.
     -   `appTheme`: El tema de Material-UI preconfigurado.
     -   `appDeliveryTheme`: Nuevo tema de Material-UI para Delivery.
