@@ -1,14 +1,14 @@
 import React, { ReactNode } from 'react';
 import Box from '@mui/material/Box';
 import Modal, { ModalProps as MuiModalProps } from '@mui/material/Modal'; // Import ModalProps
-import { appTheme } from '../styles/CustomTheme'; // Updated path
+import { appDeliveryTheme } from '../styles/CustomTheme'; // Updated path
 import { ThemeProvider } from '@mui/material/styles';
 import { CustomTypography } from './CustomTypography';
 import CloseIcon from '@mui/icons-material/Close'; // For a close button
 import { IconButton } from '@mui/material'; // For the close button
 
 // It's better to define styles using the theme for consistency
-const modalStyle = (theme: typeof appTheme) => ({ // Type theme for better intellisense
+const modalStyle = (theme: typeof appDeliveryTheme) => ({ // Type theme for better intellisense
   position: 'absolute' as 'absolute', // Explicitly type position
   top: '50%',
   left: '50%',
@@ -82,7 +82,7 @@ export const CustomModal: React.FC<CustomModalProps> = ({
     if (!open) return null;
 
     return (
-        <ThemeProvider theme={appTheme}>
+        <ThemeProvider theme={appDeliveryTheme}>
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -94,7 +94,7 @@ export const CustomModal: React.FC<CustomModalProps> = ({
                 disableRestoreFocus={restMuiModalProps.disableRestoreFocus ?? false}
                 {...restMuiModalProps} // Pass other MUI Modal props
             >
-                <Box sx={modalStyle(appTheme)}>
+                <Box sx={modalStyle(appDeliveryTheme)}>
                     {showCloseButton && (
                         <IconButton
                             aria-label="close modal"

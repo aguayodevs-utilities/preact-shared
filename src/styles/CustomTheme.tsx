@@ -3,7 +3,7 @@ import { createTheme, ThemeOptions } from '@mui/material/styles';
 import { appColors, appDeliveryColors } from '../constants/appColors';
 
 /**
- * @constant appTheme
+ * @constant appDeliveryTheme
  * @description The custom Material-UI theme for the application.
  * It is created using `createTheme` from MUI and uses `appColors`
  * for the palette configuration. This theme can be extended with other
@@ -14,10 +14,10 @@ import { appColors, appDeliveryColors } from '../constants/appColors';
  * @example
  * // To use this theme, wrap your application or component tree with MUI's ThemeProvider:
  * // import { ThemeProvider } from '@mui/material/styles';
- * // import { appTheme } from './path/to/CustomTheme';
+ * // import { appDeliveryTheme } from './path/to/CustomTheme';
  * //
  * // ReactDOM.render(
- * //   <ThemeProvider theme={appTheme}>
+ * //   <ThemeProvider theme={appDeliveryTheme}>
  * //     <App />
  * //   </ThemeProvider>,
  * //   document.getElementById('root')

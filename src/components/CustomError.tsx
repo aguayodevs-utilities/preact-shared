@@ -5,7 +5,7 @@ import {
 } from '@mui/material'; // Typography and Button removed
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 import { ThemeProvider } from '@mui/material/styles';
-import { appTheme } from '../styles/CustomTheme'; // Updated path
+import { appDeliveryTheme } from '../styles/CustomTheme'; // Updated path
 import { CustomTypography } from './CustomTypography';
 import { CustomButton } from './CustomButton'; // Using CustomButton
 
@@ -51,7 +51,7 @@ export const ErrorState: React.FC<ErrorStateProps> = ({
   onAction,
   children
 }) => (
-  <ThemeProvider theme={appTheme}>
+  <ThemeProvider theme={appDeliveryTheme}>
     <Box
       component={Paper}
       elevation={0} // Consider a slight elevation for better visual separation if needed

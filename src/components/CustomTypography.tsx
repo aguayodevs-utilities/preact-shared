@@ -1,7 +1,7 @@
 import React from "react";
 import { ThemeProvider, Typography, useTheme } from "@mui/material";
 import { TypographyProps } from "../interfaces/interface.Typography"; // This now extends MuiTypographyProps
-import { appTheme } from "../styles/CustomTheme"; // Updated path
+import { appDeliveryTheme } from "../styles/CustomTheme"; // Updated path
 
 /**
  * @component CustomTypographyComponent
@@ -51,7 +51,7 @@ const CustomTypographyComponent: React.FC<TypographyProps> = (props) => {
  * @component CustomTypography
  * @description A wrapper component for CustomTypographyComponent that provides a ThemeProvider.
  * This ensures that the typography is rendered within the context of the application's theme
- * and allows usage of custom theme properties if defined in `appTheme`.
+ * and allows usage of custom theme properties if defined in `appDeliveryTheme`.
  *
  * @param {TypographyProps} props - The props for the typography component.
  * @returns {React.ReactElement} The themed typography component.
@@ -66,7 +66,7 @@ const CustomTypographyComponent: React.FC<TypographyProps> = (props) => {
  * </CustomTypography>
  */
 export const CustomTypography: React.FC<TypographyProps> = (props) => (
-    <ThemeProvider theme={appTheme}>
+    <ThemeProvider theme={appDeliveryTheme}>
         <CustomTypographyComponent {...props} />
     </ThemeProvider>
 );

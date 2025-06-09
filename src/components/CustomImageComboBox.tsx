@@ -9,7 +9,7 @@ import {
   Theme, // Import Theme for type hinting
 } from '@mui/material'; // Typography removed
 import type { ImageComboBoxOption, ImageComboBoxProps } from '../interfaces/interface.imageComboBox';
-import { appTheme } from '../styles/CustomTheme'; // Updated path
+import { appDeliveryTheme } from '../styles/CustomTheme'; // Updated path
 import { ThemeProvider, useTheme } from '@mui/material/styles';
 import { CustomTypography } from './CustomTypography';
 
@@ -51,7 +51,7 @@ export const CustomImageComboBox: React.FC<ImageComboBoxProps> = ({
   const currentTheme = useTheme(); // Renamed to avoid conflict with Theme type
 
   return (
-    <ThemeProvider theme={appTheme}>
+    <ThemeProvider theme={appDeliveryTheme}>
       <Autocomplete
         options={options}
         getOptionLabel={(option) => option.label} // Ensure option is typed if possible
@@ -64,7 +64,7 @@ export const CustomImageComboBox: React.FC<ImageComboBoxProps> = ({
         noOptionsText="Sin resultados"
         sx={{
           width: '100%',
-          '& .MuiOutlinedInput-root': { backgroundColor: appTheme.palette.background.paper }, // Use theme variable
+          '& .MuiOutlinedInput-root': { backgroundColor: appDeliveryTheme.palette.background.paper }, // Use theme variable
         }}
         renderInput={(params) => {
           const { InputProps, ...restParams } = params; // Destructure to avoid passing InputProps directly if modified
@@ -88,19 +88,19 @@ export const CustomImageComboBox: React.FC<ImageComboBoxProps> = ({
               disabled={disabled}
               // color="primary" // color prop on TextField is for focus ring, not text/bg
               sx={{
-                // backgroundColor: appTheme.palette.background.paper, // Moved to Autocomplete root for consistency
+                // backgroundColor: appDeliveryTheme.palette.background.paper, // Moved to Autocomplete root for consistency
                 '& input::placeholder': {
-                  color: appTheme.palette.text.secondary, // Use theme for placeholder color
+                  color: appDeliveryTheme.palette.text.secondary, // Use theme for placeholder color
                   opacity: 1,
                 },
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: appTheme.palette.divider, // Use theme for border color
+                  borderColor: appDeliveryTheme.palette.divider, // Use theme for border color
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: appTheme.palette.primary.main, // Use theme for hover border
+                  borderColor: appDeliveryTheme.palette.primary.main, // Use theme for hover border
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: appTheme.palette.primary.main, // Use theme for focused border
+                  borderColor: appDeliveryTheme.palette.primary.main, // Use theme for focused border
                   borderWidth: '1px', // Ensure focus ring is visible
                 },
               }}
