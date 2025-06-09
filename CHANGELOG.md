@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.6] - 2025-06-08
+
+### Added
+
+-   `appDeliveryColors` theme to `src/constants/appColors.tsx`.
+
+### Changed
+
+-   Updated `README.md` to mention `appDeliveryColors` as an exported theme.
+
 ## [1.0.5] - 2025-06-08
 
 ### Added
