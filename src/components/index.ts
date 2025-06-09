@@ -10,5 +10,6 @@ export * from './CustomNavbar';
 export * from './CustomTextArea';
 // export * from './CustomTheme'; // Should be in src/styles
 export * from './CustomTypography';
+export * from './CustomRoleValidator'
 // Removed duplicate CustomTypography export
 // export * from './CustomToast'; // If present, should be in src/helpers
