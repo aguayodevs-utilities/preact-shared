@@ -20,7 +20,7 @@ export interface User {
    * This field might be optional depending on the user data source.
    * Consider making it `second_name?: string;` if it can be absent.
    */
-  second_name: string; // Consider renaming to secondName or lastName for camelCase consistency
+  sname: string; // Consider renaming to secondName or lastName for camelCase consistency
   /** URL or path to the user's avatar or profile image. */
   image: string; // Could be optional: `image?: string;`
   /**
