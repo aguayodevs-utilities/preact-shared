@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0] - 2025-06-09
+
+### Added
+
+-   `CustomRoleValidator` component for validating user roles.
+
+### Changed
+
+-   Refactored `CustomLayout` to integrate `useUserSession` via `CustomUserProvider` for centralized user session management and conditional rendering of protected content.
+-   `CustomNavbar` now receives user session data (`user`, `logout`, `isLoading`) directly as props from `CustomLayout`.
+-   `useUserSession` hook now exports `SessionContext` and `CustomUserProvider` for easier session context consumption.
+
 ## [1.1.0] - 2025-06-08
 
 ### Changed

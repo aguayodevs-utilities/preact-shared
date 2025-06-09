@@ -75,6 +75,7 @@ import {
   CustomImageComboBox,
   CustomInput,
   CustomNavbar,
+  CustomRoleValidator, // Nuevo componente para validación de roles
   CustomTextArea,
   CustomTypography,
   // Tema (si deseas usarlo directamente)
@@ -83,6 +84,8 @@ import {
   // Hooks
   useUserSession,
   useBreadcrumbs,
+  CustomUserProvider, // Proveedor de contexto de sesión
+  SessionContext,     // Contexto de sesión para consumir en componentes hijos
   // Constantes
   appColors, // Paleta de colores usada en appTheme
   appDeliveryColors, // Paleta de colores para appDeliveryTheme
@@ -112,6 +115,20 @@ function MyApp() {
     </CustomLayout>
   );
 }
+
+// Ejemplo de uso de CustomRoleValidator
+import { CustomRoleValidator } from '@aguayodevs-utilities/preact-shared';
+
+function AdminPage() {
+  return (
+    <CustomLayout environment="development" urlUser="/auth/session">
+      <CustomRoleValidator role="admin">
+        <h1>Bienvenido, Administrador!</h1>
+        {/* Contenido solo visible para usuarios con rol 'admin' */}
+      </CustomRoleValidator>
+    </CustomLayout>
+  );
+}
 ```
 
 ## Módulos Exportados
@@ -125,14 +142,15 @@ El paquete está estructurado en los siguientes módulos principales, todos acce
     -   `CustomError`
     -   `CustomImageComboBox`
     -   `CustomInput`
-    -   `CustomLayout`
+    -   `CustomLayout`: Componente de layout principal que ahora gestiona la sesión de usuario a través de `CustomUserProvider` y pasa los datos de sesión a sus hijos.
     -   `CustomModal`
-    -   `CustomNavbar`
+    -   `CustomNavbar`: Componente de navegación que ahora recibe directamente los datos de sesión (`user`, `logout`, `isLoading`) como props.
+    -   `CustomRoleValidator`: Nuevo componente para proteger rutas o contenido basado en el rol del usuario. Debe ser usado dentro de `CustomLayout` con `urlUser` definido.
     -   `CustomTextArea`
     -   `CustomTypography`
 -   **`hooks`**: Hooks de Preact personalizados.
     -   `useBreadcrumbs`
-    -   `useUserSession`
+    -   `useUserSession`: Hook para la gestión de la sesión de usuario. Ahora exporta `SessionContext` y `CustomUserProvider` para un consumo más flexible del contexto de sesión.
 -   **`constants`**: Constantes de la aplicación.
     -   `appColors`: Objeto de paleta de colores principal.
     -   `appDeliveryColors`: Objeto de paleta de colores para temas de Delivery.

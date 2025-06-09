@@ -1,4 +1,6 @@
-import React, { FunctionComponent, ReactNode, useContext } from 'react';
+import React, { FunctionComponent } from 'preact';
+import { useContext } from 'preact/hooks';
+import type { ReactNode } from 'react';
 import { CssBaseline, Box, Container, Typography, Button, CircularProgress } from '@mui/material';
 import { CustomNavbar } from './CustomNavbar';
 import { ToastContainer } from 'react-toastify';
