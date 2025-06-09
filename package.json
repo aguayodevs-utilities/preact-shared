@@ -1,6 +1,6 @@
 {
   "name": "@aguayodevs-utilities/preact-shared",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "main": "dist/index.mjs",
   "scripts": {
     "build": "vite build",
