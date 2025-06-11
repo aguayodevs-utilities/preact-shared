@@ -16,6 +16,7 @@ export interface CustomLayoutProps {
   urlLogout?: string;
   showBreadcrumb?: boolean;
   showNavbar?: boolean;
+  urlMenu?: string;
 }
 
 export const CustomLayout: FunctionComponent<CustomLayoutProps> = ({
@@ -25,6 +26,7 @@ export const CustomLayout: FunctionComponent<CustomLayoutProps> = ({
   urlLogout,
   showBreadcrumb = true,
   showNavbar = true,
+  urlMenu = undefined
 }) => {
   // Rutas protegidas: envolver en proveedor de sesión
   if (urlUser) {
@@ -45,7 +47,7 @@ export const CustomLayout: FunctionComponent<CustomLayoutProps> = ({
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <CssBaseline />
-      {showNavbar && <CustomNavbar environment={environment} />}
+      {showNavbar && <CustomNavbar environment={environment} urlMenu={urlMenu}/>}
       <Container component="main" sx={{ flexGrow: 1, py: 3 }}>
         {showBreadcrumb && <CustomBreadcrumb />}
         {children}

@@ -43,7 +43,7 @@ import React from 'react';
   
             {/* Si no estamos en carga y tenemos user o queremos botón de login */}
             {!isLoading && (
-              <Box display="flex" gap={2} alignItems="center">
+              <Box display="flex" gap={2} alignItems="center" sx={{ml: 'auto'}}>
                 {user ? (
                   <>
                     <CustomTypography variant="body1">
