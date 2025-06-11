@@ -60,7 +60,7 @@ function SidebarDrawer() {
                   close();
                 }}
               >
-                <ListItemText primary={item.label} />
+                <ListItemText secondary={item.label} />
               </ListItemButton>
             </ListItem>
           ))}

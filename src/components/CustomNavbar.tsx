@@ -33,13 +33,13 @@ import React from 'react';
           }}
         >
           <Toolbar>
-            {urlMenu && <CustomSidebar urlMenu={urlMenu} />}
             <img
               src="/logo.png"
               alt="Application Logo"
-              style={{ width: 50, height: 50, marginRight: 16, cursor: 'pointer' }}
+              style={{ width: 50, height: 50, cursor: 'pointer' }}
               onClick={() => (window.location.href = '/')}
             />
+            {urlMenu && <CustomSidebar urlMenu={urlMenu} />}
   
             {/* Si no estamos en carga y tenemos user o queremos botón de login */}
             {!isLoading && (

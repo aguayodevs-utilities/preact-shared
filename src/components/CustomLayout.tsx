@@ -36,6 +36,7 @@ export const CustomLayout: FunctionComponent<CustomLayoutProps> = ({
           environment={environment}
           showNavbar={showNavbar}
           showBreadcrumb={showBreadcrumb}
+          urlMenu={urlMenu}
         >
           {children}
         </ProtectedLayoutContent>
@@ -60,10 +61,15 @@ export const CustomLayout: FunctionComponent<CustomLayoutProps> = ({
 /**
  * Contenido del layout que depende de la sesión (solo dentro del proveedor)
  */
-const ProtectedLayoutContent: FunctionComponent<Pick<CustomLayoutProps, 'environment' | 'showNavbar' | 'showBreadcrumb'> & { children: ReactNode }> = ({
+interface ProtectedLayoutContentProps extends Pick<CustomLayoutProps, 'environment' | 'showNavbar' | 'showBreadcrumb' | 'urlMenu'> {
+  children: ReactNode;
+}
+
+const ProtectedLayoutContent: FunctionComponent<ProtectedLayoutContentProps> = ({
   environment,
   showNavbar,
   showBreadcrumb,
+  urlMenu, // Receive urlMenu here
   children,
 }) => {
   const { user, logout, isLoading, error } = useContext(SessionContext);
@@ -90,7 +96,13 @@ const ProtectedLayoutContent: FunctionComponent<Pick<CustomLayoutProps, 'environ
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <CssBaseline />
       {showNavbar && (
-        <CustomNavbar environment={environment} user={user} logout={logout} isLoading={isLoading} />
+        <CustomNavbar
+          environment={environment}
+          user={user}
+          logout={logout}
+          isLoading={isLoading}
+          urlMenu={urlMenu} // Pass urlMenu to CustomNavbar here
+        />
       )}
       <Container component="main" sx={{ flexGrow: 1, py: 3 }}>
         {showBreadcrumb && <CustomBreadcrumb />}

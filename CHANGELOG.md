@@ -1,13 +1,20 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+
+## [1.3.2] - 2025-06-11
+
+### Fixed 
+
+-  `CustomLayout`component ([`src/components/CustomLayout.tsx`](preact-shared/src/components/CustomLayout.tsx:1)): Se corrige propiedad urlMenu, para enviarse correctamente a CustomNavbar.
+
 ## [1.3.1] - 2025-06-11
 
 ### Added
 
 -  `CustomLayout`component ([`src/components/CustomLayout.tsx`](preact-shared/src/components/CustomLayout.tsx:1)): Se añade propiedad faltante urlMenu.
 
-### Fixed - 2025-06-11
+### Fixed 
 
 -  `CustomNavbar`component ([`src/components/CustomNavbar.tsx`](preact-shared/src/components/CustomNavbar.tsx:1)): Se añade estilo sx a componente Box para alinear a la derecha el contenido del navbar a partir del logo.
 
