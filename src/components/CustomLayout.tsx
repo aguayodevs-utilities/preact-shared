@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'preact';
 import { useContext } from 'preact/hooks';
-import type { ReactNode } from 'react';
+import type { ReactNode } from 'preact/compat';
 import { CssBaseline, Box, Container, Typography, Button, CircularProgress } from '@mui/material';
 import { CustomNavbar } from './CustomNavbar';
 import { ToastContainer } from 'react-toastify';
@@ -50,7 +50,7 @@ export const CustomLayout: FunctionComponent<CustomLayoutProps> = ({
         {showBreadcrumb && <CustomBreadcrumb />}
         {children}
       </Container>
-      <ToastContainer position="bottom-right" autoClose={5000} theme="colored" />
+      <ToastContainer position="bottom-right" autoClose={5000} theme="colored" aria-label="Notifications" />
     </Box>
   );
 };
@@ -94,7 +94,7 @@ const ProtectedLayoutContent: FunctionComponent<Pick<CustomLayoutProps, 'environ
         {showBreadcrumb && <CustomBreadcrumb />}
         {children}
       </Container>
-      <ToastContainer position="bottom-right" autoClose={5000} theme="colored" />
+      <ToastContainer position="bottom-right" autoClose={5000} theme="colored" aria-label="Notifications" />
     </Box>
   );
 };

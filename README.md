@@ -75,21 +75,23 @@ import {
   CustomImageComboBox,
   CustomInput,
   CustomNavbar,
-  CustomRoleValidator, // Nuevo componente para validación de roles
+  CustomRoleValidator,
+  CustomSidebar, // Nuevo componente de Sidebar
   CustomTextArea,
   CustomTypography,
   // Tema (si deseas usarlo directamente)
   appTheme,
-  appDeliveryTheme, // Nuevo tema de Material-UI para Delivery
+  appDeliveryTheme,
   // Hooks
   useUserSession,
   useBreadcrumbs,
-  CustomUserProvider, // Proveedor de contexto de sesión
-  SessionContext,     // Contexto de sesión para consumir en componentes hijos
+  useSidebar, // Nuevo hook para el Sidebar
+  CustomUserProvider,
+  SessionContext,
   // Constantes
-  appColors, // Paleta de colores usada en appTheme
-  appDeliveryColors, // Paleta de colores para appDeliveryTheme
-  appUrls,   // URLs base de la aplicación
+  appColors,
+  appDeliveryColors,
+  appUrls,
   // Helpers (funciones de Toast)
   customToast,
   toastSuccess,
@@ -99,7 +101,7 @@ import {
   // Contenedor de Toast (de react-toastify)
   ToastContainer
   // Interfaces (si necesitas tipar algo específicamente)
-  // type User, type Crumb, type ImageComboBoxOption, etc.
+  // type User, type Crumb, type ImageComboBoxOption, type NavbarProps, type SidebarProps, etc.
 } from '@aguayodevs-utilities/preact-shared';
 
 // Ejemplo de uso de Layout y ToastContainer
@@ -109,6 +111,7 @@ function MyApp() {
       environment="development"
       urlUser="/auth/session" // Opcional: si se proporciona, activa la protección de ruta y la gestión de sesión
       urlLogout="/auth/logout" // Opcional: endpoint para cierre de sesión
+      urlMenu="/api/menu" // Opcional: endpoint para cargar datos del menú del sidebar
     >
       {/* Contenido de tu página */}
       <ToastContainer />
@@ -131,6 +134,32 @@ function AdminPage() {
 }
 ```
 
+### 3. Configuración de TypeScript y Preact (react-shim.d.ts)
+
+Para asegurar la compatibilidad de tipos entre Preact y el ecosistema React (especialmente al usar bibliotecas como Material-UI que esperan tipos de React), este paquete incluye un archivo `react-shim.d.ts`. Este archivo mapea tipos comunes de React (como `ReactNode`, `FC`) a sus equivalentes en Preact (`ComponentChildren`, `FunctionComponent`).
+
+**Importante:** Para que este shim funcione correctamente, asegúrate de que tu archivo `tsconfig.json` en el proyecto consumidor incluya este archivo en sus `files` o `include` para que TypeScript lo reconozca globalmente.
+
+Ejemplo de `tsconfig.json` en tu proyecto:
+```json
+{
+  "compilerOptions": {
+    // ...otras opciones
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact"
+  },
+  "include": [
+    "src",
+    "node_modules/@aguayodevs-utilities/preact-shared/dist/react-shim.d.ts" // Asegúrate que la ruta sea correcta
+  ]
+  // o si prefieres "files":
+  // "files": [
+  //   "node_modules/@aguayodevs-utilities/preact-shared/dist/react-shim.d.ts"
+  // ]
+}
+```
+El paquete `preact-shared` ya utiliza internamente este shim, y los componentes como `CustomModal`, `CustomNavbar`, y `CustomTypography` han sido actualizados para usar los tipos correctos de Preact (`FunctionComponent`, `ComponentChildren`).
+
 ## Módulos Exportados
 
 El paquete está estructurado en los siguientes módulos principales, todos accesibles desde la importación raíz:
@@ -142,28 +171,31 @@ El paquete está estructurado en los siguientes módulos principales, todos acce
     -   `CustomError`
     -   `CustomImageComboBox`
     -   `CustomInput`
-    -   `CustomLayout`: Componente de layout principal que ahora gestiona la sesión de usuario a través de `CustomUserProvider` y pasa los datos de sesión a sus hijos.
-    -   `CustomModal`
-    -   `CustomNavbar`: Componente de navegación que ahora recibe directamente los datos de sesión (`user`, `logout`, `isLoading`) como props.
-    -   `CustomRoleValidator`: Nuevo componente para proteger rutas o contenido basado en el rol del usuario. Debe ser usado dentro de `CustomLayout` con `urlUser` definido.
+    -   `CustomLayout`: Componente de layout principal. Gestiona la sesión de usuario y pasa `urlMenu` a `CustomNavbar`.
+    -   `CustomModal`: Corregido para usar tipos de Preact (`FunctionComponent`, `ComponentChildren`).
+    -   `CustomNavbar`: Componente de navegación. Integra `CustomSidebar` y recibe `urlMenu`. Corregido para usar `FunctionComponent`.
+    -   `CustomRoleValidator`: Componente para proteger rutas o contenido basado en el rol del usuario.
+    -   `CustomSidebar`: Nuevo componente de menú lateral (sidebar).
     -   `CustomTextArea`
-    -   `CustomTypography`
+    -   `CustomTypography`: Corregido para usar `FunctionComponent` de Preact.
 -   **`hooks`**: Hooks de Preact personalizados.
     -   `useBreadcrumbs`
-    -   `useUserSession`: Hook para la gestión de la sesión de usuario. Ahora exporta `SessionContext` y `CustomUserProvider` para un consumo más flexible del contexto de sesión.
+    -   `useUserSession`: Hook para la gestión de la sesión de usuario.
+    -   `useSidebar`: Nuevo hook para gestionar el estado y la carga de datos del `CustomSidebar`.
 -   **`constants`**: Constantes de la aplicación.
-    -   `appColors`: Objeto de paleta de colores principal.
-    -   `appDeliveryColors`: Objeto de paleta de colores para temas de Delivery.
-    -   `appUrls`: Objeto con URLs base y un helper `getBase()`.
--   **`interfaces`**: Definiciones de TypeScript para las entidades y props.
-    -   `NavbarProps`: Ahora recibe directamente `user`, `logout`, e `isLoading` del hook `useUserSession` gestionado en `CustomLayout`.
-    -   `CustomLayoutProps`: Incluye `urlUser` (opcional, para activar la protección de ruta y gestión de sesión) y `urlLogout`.
+    -   `appColors`
+    -   `appDeliveryColors`
+    -   `appUrls`
+-   **`interfaces`**: Definiciones de TypeScript.
+    -   `NavbarProps`: Incluye `urlMenu` para la configuración del `CustomSidebar`.
+    -   `CustomLayoutProps`: Incluye `urlMenu` para pasar al `CustomNavbar`.
+    -   `SidebarProps`: Nuevas interfaces para `CustomSidebar`.
 -   **`styles`**: Relacionado con el tema.
-    -   `appTheme`: El tema de Material-UI preconfigurado.
-    -   `appDeliveryTheme`: Nuevo tema de Material-UI para Delivery.
+    -   `appTheme`
+    -   `appDeliveryTheme`
 -   **`helpers`**: Funciones de utilidad.
-    -   `customToast`, `toastSuccess`, `toastError`, `toastWarning`, `toastInfo` (basadas en `react-toastify`).
--   **`react-toastify`**: Se reexportan todas las funcionalidades de `react-toastify`, incluyendo `ToastContainer`.
+    -   `customToast`, `toastSuccess`, etc.
+-   **`react-toastify`**: Se reexportan todas las funcionalidades.
 
 ## Scripts Disponibles
 

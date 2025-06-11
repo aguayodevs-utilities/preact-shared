@@ -2,6 +2,39 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.0] - 2025-06-11
+
+### Added
+
+-   `CustomSidebar` component ([`src/components/CustomSidebar.tsx`](preact-shared/src/components/CustomSidebar.tsx:1)): A new sidebar component for navigation.
+-   `useSidebar` hook ([`src/hooks/useSidebar.tsx`](preact-shared/src/hooks/useSidebar.tsx:1)): Hook for managing the state of the `CustomSidebar`.
+-   `interface.sidebar.ts` ([`src/interfaces/interface.sidebar.ts`](preact-shared/src/interfaces/interface.sidebar.ts:1)): Defines props for the `CustomSidebar` component.
+-   `react-shim.d.ts` ([`preact-shared/react-shim.d.ts`](preact-shared/react-shim.d.ts:1)): TypeScript declaration file to provide Preact compatibility shims for React types, improving type checking in Preact projects using React-style imports.
+-   Exported `useSidebar` from [`src/hooks/index.ts`](preact-shared/src/hooks/index.ts:1).
+
+### Changed
+
+-   `CustomNavbar` ([`src/components/CustomNavbar.tsx`](preact-shared/src/components/CustomNavbar.tsx:1)):
+    -   Integrated the new `CustomSidebar` component.
+    -   Updated to use `FunctionComponent` from `preact` instead of `React.FC` for better Preact compatibility.
+-   `interface.navbar.ts` ([`src/interfaces/interface.navbar.ts`](preact-shared/src/interfaces/interface.navbar.ts:1)): Added `urlMenu` prop to `NavbarProps` for `CustomSidebar` data fetching.
+-   `CustomModal` ([`src/components/CustomModal.tsx`](preact-shared/src/components/CustomModal.tsx:1)):
+    -   Updated to use `FunctionComponent` and `ComponentChildren` from `preact` for improved type compatibility.
+    -   Explicitly typed component props to resolve implicit `any` types.
+    -   Removed redundant JSDoc type information.
+-   `CustomTypography` ([`src/components/CustomTypography.tsx`](preact-shared/src/components/CustomTypography.tsx:1)):
+    -   Updated to use `FunctionComponent` from `preact` instead of `React.FC` for better Preact compatibility.
+-   `useUserSession` hook ([`src/hooks/useUserSession.tsx`](preact-shared/src/hooks/useUserSession.tsx:1)):
+    -   Updated `CustomUserProvider` to use `FunctionComponent` from `preact` instead of `React.FC`.
+-   `CustomLayout` ([`src/components/CustomLayout.tsx`](preact-shared/src/components/CustomLayout.tsx:1)): Modified to pass the `urlMenu` prop to `CustomNavbar` for sidebar functionality. (Assumption based on `CustomNavbar` changes).
+-   `tsconfig.json` ([`preact-shared/tsconfig.json`](preact-shared/tsconfig.json:1)): Updated to include `react-shim.d.ts` in files/include, ensuring Preact type shims are applied globally. (Assumption based on the addition of `react-shim.d.ts`).
+
+### Fixed
+
+-   TypeScript errors in `CustomModal`, `CustomNavbar`, `CustomTypography`, and `useUserSession` hook by aligning React-specific types (`ReactNode`, `React.FC`) with their Preact equivalents (`ComponentChildren`, `FunctionComponent`).
+-   Build error in `CustomSidebar` by correcting relative import paths for hooks and interfaces.
+-   Accessibility issue in `CustomModal` by correcting the `id` of the content `Box` to match the `aria-describedby` attribute on the `Modal` component.
+
 ## [1.2.0] - 2025-06-09
 
 ### Added

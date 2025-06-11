@@ -1,4 +1,5 @@
 import React from "react";
+import { FunctionComponent } from "preact";
 import { ThemeProvider, Typography, useTheme } from "@mui/material";
 import { TypographyProps } from "../interfaces/interface.Typography"; // This now extends MuiTypographyProps
 import { appDeliveryTheme } from "../styles/CustomTheme"; // Updated path
@@ -12,7 +13,7 @@ import { appDeliveryTheme } from "../styles/CustomTheme"; // Updated path
  * @param {TypographyProps} props - The props for the typography component.
  * @returns {React.ReactElement} The rendered typography component.
  */
-const CustomTypographyComponent: React.FC<TypographyProps> = (props) => {
+const CustomTypographyComponent: FunctionComponent<TypographyProps> = (props) => {
   const theme = useTheme(); // Access the theme for default values if needed
 
   // Destructure custom props and pass the rest to MUI Typography
@@ -65,9 +66,8 @@ const CustomTypographyComponent: React.FC<TypographyProps> = (props) => {
  *   This is a paragraph.
  * </CustomTypography>
  */
-export const CustomTypography: React.FC<TypographyProps> = (props) => (
+export const CustomTypography: FunctionComponent<TypographyProps> = (props) => (
     <ThemeProvider theme={appDeliveryTheme}>
         <CustomTypographyComponent {...props} />
     </ThemeProvider>
 );
-

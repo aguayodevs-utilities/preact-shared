@@ -27,6 +27,7 @@ export interface NavbarProps {
   isLoading?: boolean;
   /** Callback to log the user out. */
   logout?: () => void;
+  urlMenu?: string;
 }
 
 

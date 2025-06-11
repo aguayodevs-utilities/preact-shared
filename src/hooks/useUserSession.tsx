@@ -1,5 +1,5 @@
 /// <reference types="vite/client" />
-import { createContext } from 'preact';
+import { createContext, FunctionComponent } from 'preact';
 import type { ComponentChildren } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import axios, { AxiosError } from 'axios';
@@ -61,7 +61,7 @@ export const SessionContext = createContext<UseUserSessionReturn>({
 /**
  * Proveedor de sesión para envolver componentes protegidos
  */
-export const CustomUserProvider: React.FC<UseUserSessionProps & { children: ComponentChildren }> = ({
+export const CustomUserProvider: FunctionComponent<UseUserSessionProps & { children: ComponentChildren }> = ({
   sessionEndpointUrl,
   urlLogout,
   children
