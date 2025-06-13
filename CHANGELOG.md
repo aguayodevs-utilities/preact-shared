@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.3.3] - 2025-06-13
+## [1.3.4] - 2025-06-13
 
 ### Added
 
@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - `useBreadcrumbs` hook ([`src/hooks/useBreadcrumbs.tsx`](src/hooks/useBreadcrumbs.tsx:1)) now accepts an optional `urlLabels` prop. If provided, it fetches a JSON object with labels from the URL and merges them with the static `LABELS` object. This makes the breadcrumb labels dynamically configurable.
+- `CustomLayout` component ([`src/components/CustomLayout.tsx`](src/components/CustomLayout.tsx:1)) now accepts an optional `urlLabels` prop and passes it to the `CustomBreadcrumb` component.
 ## [1.3.2] - 2025-06-11
 
 ### Fixed 

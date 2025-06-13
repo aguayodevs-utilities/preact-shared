@@ -17,6 +17,7 @@ export interface CustomLayoutProps {
   showBreadcrumb?: boolean;
   showNavbar?: boolean;
   urlMenu?: string;
+  urlLabels?: string;
 }
 
 export const CustomLayout: FunctionComponent<CustomLayoutProps> = ({
@@ -26,7 +27,8 @@ export const CustomLayout: FunctionComponent<CustomLayoutProps> = ({
   urlLogout,
   showBreadcrumb = true,
   showNavbar = true,
-  urlMenu = undefined
+  urlMenu = undefined,
+  urlLabels
 }) => {
   // Rutas protegidas: envolver en proveedor de sesión
   if (urlUser) {
@@ -37,6 +39,7 @@ export const CustomLayout: FunctionComponent<CustomLayoutProps> = ({
           showNavbar={showNavbar}
           showBreadcrumb={showBreadcrumb}
           urlMenu={urlMenu}
+          urlLabels={urlLabels}
         >
           {children}
         </ProtectedLayoutContent>
@@ -50,7 +53,7 @@ export const CustomLayout: FunctionComponent<CustomLayoutProps> = ({
       <CssBaseline />
       {showNavbar && <CustomNavbar environment={environment} urlMenu={urlMenu}/>}
       <Container component="main" sx={{ flexGrow: 1, py: 3 }}>
-        {showBreadcrumb && <CustomBreadcrumb />}
+        {showBreadcrumb && <CustomBreadcrumb urlLabels={urlLabels} />}
         {children}
       </Container>
       <ToastContainer position="bottom-right" autoClose={5000} theme="colored" aria-label="Notifications" />
@@ -61,7 +64,7 @@ export const CustomLayout: FunctionComponent<CustomLayoutProps> = ({
 /**
  * Contenido del layout que depende de la sesión (solo dentro del proveedor)
  */
-interface ProtectedLayoutContentProps extends Pick<CustomLayoutProps, 'environment' | 'showNavbar' | 'showBreadcrumb' | 'urlMenu'> {
+interface ProtectedLayoutContentProps extends Pick<CustomLayoutProps, 'environment' | 'showNavbar' | 'showBreadcrumb' | 'urlMenu' | 'urlLabels'> {
   children: ReactNode;
 }
 
@@ -70,6 +73,7 @@ const ProtectedLayoutContent: FunctionComponent<ProtectedLayoutContentProps> = (
   showNavbar,
   showBreadcrumb,
   urlMenu, // Receive urlMenu here
+  urlLabels,
   children,
 }) => {
   const { user, logout, isLoading, error } = useContext(SessionContext);
@@ -105,7 +109,7 @@ const ProtectedLayoutContent: FunctionComponent<ProtectedLayoutContentProps> = (
         />
       )}
       <Container component="main" sx={{ flexGrow: 1, py: 3 }}>
-        {showBreadcrumb && <CustomBreadcrumb />}
+        {showBreadcrumb && <CustomBreadcrumb urlLabels={urlLabels} />}
         {children}
       </Container>
       <ToastContainer position="bottom-right" autoClose={5000} theme="colored" aria-label="Notifications" />

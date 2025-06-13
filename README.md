@@ -172,7 +172,7 @@ El paquete está estructurado en los siguientes módulos principales, todos acce
     -   `CustomError`
     -   `CustomImageComboBox`
     -   `CustomInput`
-    -   `CustomLayout`: Componente de layout principal. Gestiona la sesión de usuario y pasa `urlMenu` a `CustomNavbar`.
+    -   `CustomLayout`: Componente de layout principal. Gestiona la sesión de usuario y pasa `urlMenu` a `CustomNavbar` y `urlLabels` a `CustomBreadcrumb`.
     -   `CustomModal`: Corregido para usar tipos de Preact (`FunctionComponent`, `ComponentChildren`).
     -   `CustomNavbar`: Componente de navegación. Integra `CustomSidebar` y recibe `urlMenu`. Corregido para usar `FunctionComponent`.
     -   `CustomRoleValidator`: Componente para proteger rutas o contenido basado en el rol del usuario.
