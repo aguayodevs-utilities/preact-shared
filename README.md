@@ -124,7 +124,7 @@ import { CustomRoleValidator } from '@aguayodevs-utilities/preact-shared';
 
 function AdminPage() {
   return (
-    <CustomLayout environment="development" urlUser="/auth/session">
+    <CustomLayout environment="development" urlUser="/auth/api/session" urlLogout="auth/api/logout">
       <CustomRoleValidator role="admin">
         <h1>Bienvenido, Administrador!</h1>
         {/* Contenido solo visible para usuarios con rol 'admin' */}
@@ -166,6 +166,7 @@ El paquete está estructurado en los siguientes módulos principales, todos acce
 
 -   **`components`**: Componentes de UI reutilizables.
     -   `CustomBreadcrumb`
+-   `CustomBreadcrumb`: Ahora acepta una prop opcional `urlLabels` para cargar dinámicamente las etiquetas de los breadcrumbs desde una URL.
     -   `CustomButton`
     -   `CustomConfirm`
     -   `CustomError`
@@ -179,6 +180,7 @@ El paquete está estructurado en los siguientes módulos principales, todos acce
     -   `CustomTextArea`
     -   `CustomTypography`: Corregido para usar `FunctionComponent` de Preact.
 -   **`hooks`**: Hooks de Preact personalizados.
+-   `useBreadcrumbs`: Ahora puede recibir una URL para obtener etiquetas personalizadas, fusionándolas con las etiquetas locales.
     -   `useBreadcrumbs`
     -   `useUserSession`: Hook para la gestión de la sesión de usuario.
     -   `useSidebar`: Nuevo hook para gestionar el estado y la carga de datos del `CustomSidebar`.

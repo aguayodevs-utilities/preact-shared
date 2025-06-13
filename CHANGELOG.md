@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.3] - 2025-06-13
+
+### Added
+
+- `urlLabels` prop to `CustomBreadcrumb` component ([`src/components/CustomBreadcrumb.tsx`](src/components/CustomBreadcrumb.tsx:1)) to allow fetching breadcrumb labels from a URL.
+
+### Changed
+
+- `useBreadcrumbs` hook ([`src/hooks/useBreadcrumbs.tsx`](src/hooks/useBreadcrumbs.tsx:1)) now accepts an optional `urlLabels` prop. If provided, it fetches a JSON object with labels from the URL and merges them with the static `LABELS` object. This makes the breadcrumb labels dynamically configurable.
 ## [1.3.2] - 2025-06-11
 
 ### Fixed 
