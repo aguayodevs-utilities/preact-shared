@@ -13,12 +13,12 @@ import { NavbarProps } from '../interfaces/interface.navbar';
  * and user information (name, role, avatar) if a user is logged in.
  * Provides a logout functionality.
  *
- * @param {NavbarProps} props - Props for the Navbar, currently includes `environment`, `urlUser`, and `logoutEndpointUrl`.
+ * @param {NavbarProps} props - Props for the Navbar, currently includes `environment`, `urlUser`, and `urlLogout`.
  * @returns {React.ReactElement} The rendered Navbar component.
  *
  * @example
  * // Navbar with user session fetching from a custom endpoint
- * <CustomNavbar environment="development" urlUser="/auth/session" logoutEndpointUrl="/auth/logout" />
+ * <CustomNavbar environment="development" urlUser="/auth/session" urlLogout="/auth/logout" />
  *
  * // Navbar without user session fetching (e.g., for public pages)
  * <CustomNavbar environment="development" />

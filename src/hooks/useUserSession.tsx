@@ -44,7 +44,7 @@ export interface UseUserSessionProps {
  * // With custom session and logout URLs
  * const { user, logout, isLoading, error } = useUserSession({
  *   sessionEndpointUrl: '/auth/session',
- *   logoutEndpointUrl: '/auth/logout'
+ *   urlLogout: '/auth/logout'
  * });
  *
  * // Without session fetching (e.g., for public pages)
