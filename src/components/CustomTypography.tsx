@@ -1,7 +1,8 @@
 import React from "react";
+import { FunctionComponent } from "preact";
 import { ThemeProvider, Typography, useTheme } from "@mui/material";
 import { TypographyProps } from "../interfaces/interface.Typography"; // This now extends MuiTypographyProps
-import { appTheme } from "../styles/CustomTheme"; // Updated path
+import { appDeliveryTheme } from "../styles/CustomTheme"; // Updated path
 
 /**
  * @component CustomTypographyComponent
@@ -12,7 +13,7 @@ import { appTheme } from "../styles/CustomTheme"; // Updated path
  * @param {TypographyProps} props - The props for the typography component.
  * @returns {React.ReactElement} The rendered typography component.
  */
-const CustomTypographyComponent: React.FC<TypographyProps> = (props) => {
+const CustomTypographyComponent: FunctionComponent<TypographyProps> = (props) => {
   const theme = useTheme(); // Access the theme for default values if needed
 
   // Destructure custom props and pass the rest to MUI Typography
@@ -51,7 +52,7 @@ const CustomTypographyComponent: React.FC<TypographyProps> = (props) => {
  * @component CustomTypography
  * @description A wrapper component for CustomTypographyComponent that provides a ThemeProvider.
  * This ensures that the typography is rendered within the context of the application's theme
- * and allows usage of custom theme properties if defined in `appTheme`.
+ * and allows usage of custom theme properties if defined in `appDeliveryTheme`.
  *
  * @param {TypographyProps} props - The props for the typography component.
  * @returns {React.ReactElement} The themed typography component.
@@ -65,9 +66,8 @@ const CustomTypographyComponent: React.FC<TypographyProps> = (props) => {
  *   This is a paragraph.
  * </CustomTypography>
  */
-export const CustomTypography: React.FC<TypographyProps> = (props) => (
-    <ThemeProvider theme={appTheme}>
+export const CustomTypography: FunctionComponent<TypographyProps> = (props) => (
+    <ThemeProvider theme={appDeliveryTheme}>
         <CustomTypographyComponent {...props} />
     </ThemeProvider>
 );
-

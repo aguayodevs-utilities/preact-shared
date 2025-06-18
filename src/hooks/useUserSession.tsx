@@ -1,17 +1,11 @@
 /// <reference types="vite/client" />
+import { createContext, FunctionComponent } from 'preact';
+import type { ComponentChildren } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import axios, { AxiosError } from 'axios';
 import { User } from '../interfaces/interface.user';
 import { appUrls, IEnvironment } from '../constants/appUrls';
 
-/**
- * @interface UseUserSessionReturn
- * @description Defines the return type for the `useUserSession` hook.
- * @property {User | null} user - The current user object, or null if no user is logged in or session is being fetched.
- * @property {() => void} logout - A function to log out the current user by redirecting to the logout endpoint.
- * @property {boolean} isLoading - True if the user session is currently being fetched, false otherwise.
- * @property {Error | null} error - An error object if fetching the session failed, null otherwise.
- */
 export interface UseUserSessionReturn {
   user: User | null;
   logout: () => void;
@@ -19,12 +13,6 @@ export interface UseUserSessionReturn {
   error: AxiosError | Error | null;
 }
 
-/**
- * @interface UseUserSessionProps
- * @description Defines the props for the `useUserSession` hook.
- * @property {string} [sessionEndpointUrl] - Optional URL for fetching user session data.
- * @property {string} [urlLogout] - Optional URL for logging out the user.
- */
 export interface UseUserSessionProps {
   sessionEndpointUrl?: string;
   urlLogout?: string;
@@ -54,46 +42,24 @@ export const useUserSession = ({ sessionEndpointUrl, urlLogout }: UseUserSession
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<AxiosError | Error | null>(null);
-
   const [environment] = useState<IEnvironment>(
-    import.meta.env.MODE === "production" ? "production" : "development"
+    import.meta.env.MODE === 'production' ? 'production' : 'development'
   );
-
   const effectiveLogoutUrl = urlLogout || `${appUrls.getBase({ environment })}/sso/session/logout`;
 
   useEffect(() => {
     let isMounted = true;
     setIsLoading(true);
     setError(null);
-
     if (!sessionEndpointUrl) {
       setIsLoading(false);
       return;
     }
-
-    axios.get<{ user: User }>(sessionEndpointUrl, {
-      withCredentials: true,
-    })
-    .then(res => {
-      if (isMounted) {
-        setUser(res.data.user);
-      }
-    })
-    .catch(err => {
-      if (isMounted) {
-        console.error("Failed to fetch user session:", err);
-        setError(err);
-      }
-    })
-    .finally(() => {
-      if (isMounted) {
-        setIsLoading(false);
-      }
-    });
-
-    return () => {
-      isMounted = false;
-    };
+    axios.get<{ user: User }>(sessionEndpointUrl, { withCredentials: true })
+      .then(res => isMounted && setUser(res.data.user))
+      .catch(err => isMounted && setError(err))
+      .finally(() => isMounted && setIsLoading(false));
+    return () => { isMounted = false; };
   }, [environment, sessionEndpointUrl]);
 
   const handleLogout = (): void => {
@@ -101,4 +67,28 @@ export const useUserSession = ({ sessionEndpointUrl, urlLogout }: UseUserSession
   };
 
   return { user, logout: handleLogout, isLoading, error };
+};
+
+// Context para compartir la sesión
+export const SessionContext = createContext<UseUserSessionReturn>({
+  user: null,
+  logout: () => {},
+  isLoading: false,
+  error: null
+});
+
+/**
+ * Proveedor de sesión para envolver componentes protegidos
+ */
+export const CustomUserProvider: FunctionComponent<UseUserSessionProps & { children: ComponentChildren }> = ({
+  sessionEndpointUrl,
+  urlLogout,
+  children
+}) => {
+  const session = useUserSession({ sessionEndpointUrl, urlLogout });
+  return (
+    <SessionContext.Provider value={session}>
+      {children}
+    </SessionContext.Provider>
+  );
 };

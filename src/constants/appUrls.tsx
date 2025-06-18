@@ -11,8 +11,8 @@
 // These were originally process.env.REACT_APP_...
 // If using Vite, these should ideally be import.meta.env.VITE_...
 // For now, reverting to original to avoid TS errors without tsconfig changes.
-const URL_BASE_LOCAL = process.env.REACT_APP_URL_BASE_LOCAL || 'http://localhost:3000'; // Default fallback
-const URL_BASE_PROD = process.env.REACT_APP_URL_BASE_PROD || ''; // Fallback to empty or a sensible default
+const URL_BASE_LOCAL = ''; // Default fallback
+const URL_BASE_PROD = ''; // Fallback to empty or a sensible default
 
 /**
  * @type IEnvironment
