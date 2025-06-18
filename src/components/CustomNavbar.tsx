@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppBar, Toolbar, Avatar, Box } from '@mui/material';
 import { useUserSession } from '../hooks/useUserSession';
-import { appTheme } from '../styles/CustomTheme';
+import { appDeliveryTheme } from '../styles/CustomTheme';
 import { ThemeProvider } from '@mui/material/styles';
 import { CustomTypography } from './CustomTypography';
 import { NavbarProps } from '../interfaces/interface.navbar';
@@ -32,12 +32,12 @@ export const CustomNavbar: React.FC<NavbarProps> = ({ environment, urlUser, urlL
   }
 
   return (
-    <ThemeProvider theme={appTheme}>
+    <ThemeProvider theme={appDeliveryTheme}>
       <AppBar
         position="static"
         sx={{
-          bgcolor: appTheme.palette.background.paper,
-          boxShadow: appTheme.shadows[1],
+          bgcolor: appDeliveryTheme.palette.background.paper,
+          boxShadow: appDeliveryTheme.shadows[1],
         }}
       >
         <Toolbar>
