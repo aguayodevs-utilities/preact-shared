@@ -2,8 +2,7 @@ import { FunctionComponent } from 'preact';
 import { Breadcrumbs, Link } from '@mui/material'; // Typography removed as CustomTypography is used
 import HomeIcon from '@mui/icons-material/Home';
 import { useBreadcrumbs } from '../hooks/useBreadcrumbs';
-import { appDeliveryTheme } from '../styles/CustomTheme'; // Updated path
-import { ThemeProvider } from '@mui/material/styles';
+import { CustomThemeProvider, useCustomTheme } from '../styles/CustomThemeContext';
 import { CustomTypography } from './CustomTypography';
 
 /**
@@ -20,9 +19,10 @@ import { CustomTypography } from './CustomTypography';
  */
 export const CustomBreadcrumb = ({ urlLabels }: { urlLabels?: string }) => {
   const [crumbs, go] = useBreadcrumbs(urlLabels);
+  const theme = useCustomTheme();
   
   return (
-    <ThemeProvider theme={appDeliveryTheme}>
+    <CustomThemeProvider theme={theme}>
       <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 2, fontSize: '24px' }}>
         <Link
           underline="hover"
@@ -51,6 +51,6 @@ export const CustomBreadcrumb = ({ urlLabels }: { urlLabels?: string }) => {
           )
         )}
       </Breadcrumbs>
-    </ThemeProvider>
+    </CustomThemeProvider>
   );
 };

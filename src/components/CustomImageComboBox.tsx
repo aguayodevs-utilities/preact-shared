@@ -9,8 +9,7 @@ import {
   Theme, // Import Theme for type hinting
 } from '@mui/material'; // Typography removed
 import type { ImageComboBoxOption, ImageComboBoxProps } from '../interfaces/interface.imageComboBox';
-import { appDeliveryTheme } from '../styles/CustomTheme'; // Updated path
-import { ThemeProvider, useTheme } from '@mui/material/styles';
+import { CustomThemeProvider, useCustomTheme } from '../styles/CustomThemeContext';
 import { CustomTypography } from './CustomTypography';
 
 /**
@@ -45,13 +44,13 @@ export const CustomImageComboBox: React.FC<ImageComboBoxProps> = ({
   disabled = false,
 }) => {
   const selected = useMemo(
-    () => options.find((o) => o.value === value) || undefined, // Changed null to undefined
+    () => options.find((o) => o.value === value) || undefined,
     [options, value]
   );
-  const currentTheme = useTheme(); // Renamed to avoid conflict with Theme type
+  const theme = useCustomTheme();
 
   return (
-    <ThemeProvider theme={appDeliveryTheme}>
+    <CustomThemeProvider theme={theme}>
       <Autocomplete
         options={options}
         getOptionLabel={(option) => option.label} // Ensure option is typed if possible
@@ -64,7 +63,7 @@ export const CustomImageComboBox: React.FC<ImageComboBoxProps> = ({
         noOptionsText="Sin resultados"
         sx={{
           width: '100%',
-          '& .MuiOutlinedInput-root': { backgroundColor: appDeliveryTheme.palette.background.paper }, // Use theme variable
+          '& .MuiOutlinedInput-root': { backgroundColor: theme.palette.background.paper },
         }}
         renderInput={(params) => {
           const { InputProps, ...restParams } = params; // Destructure to avoid passing InputProps directly if modified
@@ -88,20 +87,19 @@ export const CustomImageComboBox: React.FC<ImageComboBoxProps> = ({
               disabled={disabled}
               // color="primary" // color prop on TextField is for focus ring, not text/bg
               sx={{
-                // backgroundColor: appDeliveryTheme.palette.background.paper, // Moved to Autocomplete root for consistency
                 '& input::placeholder': {
-                  color: appDeliveryTheme.palette.text.secondary, // Use theme for placeholder color
+                  color: theme.palette.text.secondary,
                   opacity: 1,
                 },
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: appDeliveryTheme.palette.divider, // Use theme for border color
+                  borderColor: theme.palette.divider,
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: appDeliveryTheme.palette.primary.main, // Use theme for hover border
+                  borderColor: theme.palette.primary.main,
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: appDeliveryTheme.palette.primary.main, // Use theme for focused border
-                  borderWidth: '1px', // Ensure focus ring is visible
+                  borderColor: theme.palette.primary.main,
+                  borderWidth: '1px',
                 },
               }}
               InputProps={{
@@ -155,6 +153,6 @@ export const CustomImageComboBox: React.FC<ImageComboBoxProps> = ({
           </Box>
         )}
       />
-    </ThemeProvider>
+    </CustomThemeProvider>
   );
 };

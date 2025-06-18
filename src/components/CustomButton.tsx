@@ -1,8 +1,7 @@
 import React from "react";
 import { Button, ButtonProps as MuiButtonProps } from "@mui/material"; // Renamed to avoid conflict
 import { CustomTypography } from "./CustomTypography";
-import { appDeliveryTheme } from "../styles/CustomTheme"; // Updated path
-import { ThemeProvider } from "@mui/material/styles";
+import { CustomThemeProvider, useCustomTheme } from "../styles/CustomThemeContext";
 
 /**
  * @interface CustomButtonProps
@@ -24,13 +23,14 @@ export interface CustomButtonProps extends MuiButtonProps {
  * @returns {React.ReactElement} The rendered button component.
  */
 const CustomButtonComponent: React.FC<CustomButtonProps> = (props) => {
+    const theme = useCustomTheme();
     // Determine button colors based on props and theme
     // Valid MUI Button color props are 'inherit', 'primary', 'secondary', 'success', 'error', 'info', 'warning'
     const isPaletteColor = props.color && ['primary', 'secondary', 'success', 'error', 'info', 'warning'].includes(props.color);
 
-    const backgroundColor = isPaletteColor ? `${props.color}.main` : (props.color === 'inherit' ? undefined : appDeliveryTheme.palette.primary.main);
-    const textColor = isPaletteColor ? `${props.color}.contrastText` : (props.color === 'inherit' ? undefined : appDeliveryTheme.palette.primary.contrastText);
-    const hoverBackgroundColor = isPaletteColor ? `${props.color}.dark` : (props.color === 'inherit' ? undefined : appDeliveryTheme.palette.primary.dark);
+    const backgroundColor = isPaletteColor ? `${props.color}.main` : (props.color === 'inherit' ? undefined : theme.palette.primary.main);
+    const textColor = isPaletteColor ? `${props.color}.contrastText` : (props.color === 'inherit' ? undefined : theme.palette.primary.contrastText);
+    const hoverBackgroundColor = isPaletteColor ? `${props.color}.dark` : (props.color === 'inherit' ? undefined : theme.palette.primary.dark);
 
     return (
         <Button
@@ -66,8 +66,8 @@ const CustomButtonComponent: React.FC<CustomButtonProps> = (props) => {
  * </CustomButton>
  */
 export const CustomButton: React.FC<CustomButtonProps> = (props) => (
-    <ThemeProvider theme={appDeliveryTheme}>
+    <CustomThemeProvider>
         <CustomButtonComponent {...props} />
-    </ThemeProvider>
+    </CustomThemeProvider>
 );
 

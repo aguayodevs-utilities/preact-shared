@@ -1,7 +1,7 @@
 import React from 'react';
-import { styled, ThemeProvider } from '@mui/material/styles'; // Combined imports
-import { TextField, TextFieldProps as MuiTextFieldProps } from '@mui/material'; // Renamed to avoid conflict, removed Theme
-import { appDeliveryTheme } from '../styles/CustomTheme'; // Updated path
+import { styled } from '@mui/material/styles';
+import { TextField, TextFieldProps as MuiTextFieldProps } from '@mui/material';
+import { CustomThemeProvider, useCustomTheme } from '../styles/CustomThemeContext';
 
 /**
  * @type CustomTextareaProps
@@ -78,9 +78,10 @@ export const CustomTextarea: React.FC<CustomTextareaProps> = (props) => {
     // multiline is implicitly true for a textarea, but TextField needs it
     ...restProps
   } = props;
+  const theme = useCustomTheme();
 
   return (
-    <ThemeProvider theme={appDeliveryTheme}>
+    <CustomThemeProvider theme={theme}>
       <StyledTextarea
         variant={variant}
         fullWidth={fullWidth}
@@ -88,6 +89,6 @@ export const CustomTextarea: React.FC<CustomTextareaProps> = (props) => {
         minRows={minRows}
         {...restProps} // Pass all other props, including sx, maxRows, etc.
       />
-    </ThemeProvider>
+    </CustomThemeProvider>
   );
 };

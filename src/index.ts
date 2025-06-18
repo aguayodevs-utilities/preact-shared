@@ -17,7 +17,8 @@ export * from './interfaces';
 export * from './helpers';
 
 // Styles
-export * from './styles'; // This re-exports from src/styles/index.ts (which should export appTheme)
+export * from './styles'; // Re-export themes and context
+export { CustomThemeProvider, useCustomTheme, CustomThemeContext } from './styles';
 
 // MUI re-exports are handled by peerDependencies, users should import directly from @mui/* packages.
 

@@ -1,8 +1,7 @@
 import React from 'react';
 import { AppBar, Toolbar, Avatar, Box } from '@mui/material';
 import { useUserSession } from '../hooks/useUserSession';
-import { appDeliveryTheme } from '../styles/CustomTheme';
-import { ThemeProvider } from '@mui/material/styles';
+import { CustomThemeProvider, useCustomTheme } from '../styles/CustomThemeContext';
 import { CustomTypography } from './CustomTypography';
 import { NavbarProps } from '../interfaces/interface.navbar';
 
@@ -25,6 +24,7 @@ import { NavbarProps } from '../interfaces/interface.navbar';
  */
 export const CustomNavbar: React.FC<NavbarProps> = ({ environment, urlUser, urlLogout }) => {
   const { user, logout, isLoading } = useUserSession({ sessionEndpointUrl: urlUser, urlLogout });
+  const theme = useCustomTheme();
 
   // Log environment if in development for debugging or specific features
   if (environment === 'development') {
@@ -32,12 +32,12 @@ export const CustomNavbar: React.FC<NavbarProps> = ({ environment, urlUser, urlL
   }
 
   return (
-    <ThemeProvider theme={appDeliveryTheme}>
+    <CustomThemeProvider theme={theme}>
       <AppBar
         position="static"
         sx={{
-          bgcolor: appDeliveryTheme.palette.background.paper,
-          boxShadow: appDeliveryTheme.shadows[1],
+          bgcolor: theme.palette.background.paper,
+          boxShadow: theme.shadows[1],
         }}
       >
         <Toolbar>
@@ -59,6 +59,7 @@ export const CustomNavbar: React.FC<NavbarProps> = ({ environment, urlUser, urlL
             <Box display="flex" gap={2} alignItems="center">
               {user && (
                 <>
+                  
                   <CustomTypography variant="body1">
                     {`${user.name.charAt(0).toUpperCase() + user.name.slice(1)} / ${user.role.toUpperCase()}`}
                   </CustomTypography>
@@ -81,6 +82,6 @@ export const CustomNavbar: React.FC<NavbarProps> = ({ environment, urlUser, urlL
           )}
         </Toolbar>
       </AppBar>
-    </ThemeProvider>
+    </CustomThemeProvider>
   );
 };

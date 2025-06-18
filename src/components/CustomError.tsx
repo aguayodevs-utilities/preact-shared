@@ -4,8 +4,7 @@ import {
   List, ListItemText
 } from '@mui/material'; // Typography and Button removed
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
-import { ThemeProvider } from '@mui/material/styles';
-import { appDeliveryTheme } from '../styles/CustomTheme'; // Updated path
+import { CustomThemeProvider, useCustomTheme } from '../styles/CustomThemeContext';
 import { CustomTypography } from './CustomTypography';
 import { CustomButton } from './CustomButton'; // Using CustomButton
 
@@ -50,8 +49,10 @@ export const ErrorState: React.FC<ErrorStateProps> = ({
   actionLabel,
   onAction,
   children
-}) => (
-  <ThemeProvider theme={appDeliveryTheme}>
+}) => {
+  const theme = useCustomTheme();
+  return (
+  <CustomThemeProvider theme={theme}>
     <Box
       component={Paper}
       elevation={0} // Consider a slight elevation for better visual separation if needed
@@ -118,5 +119,6 @@ export const ErrorState: React.FC<ErrorStateProps> = ({
         )}
       </Stack>
     </Box>
-  </ThemeProvider>
-);
+  </CustomThemeProvider>
+  );
+};

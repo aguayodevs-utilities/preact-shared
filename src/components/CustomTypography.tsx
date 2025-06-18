@@ -1,8 +1,8 @@
 import React from "react";
 import { FunctionComponent } from "preact";
-import { ThemeProvider, Typography, useTheme } from "@mui/material";
-import { TypographyProps } from "../interfaces/interface.Typography"; // This now extends MuiTypographyProps
-import { appDeliveryTheme } from "../styles/CustomTheme"; // Updated path
+import { Typography } from "@mui/material";
+import { TypographyProps } from "../interfaces/interface.Typography";
+import { CustomThemeProvider, useCustomTheme } from "../styles/CustomThemeContext";
 
 /**
  * @component CustomTypographyComponent
@@ -14,7 +14,7 @@ import { appDeliveryTheme } from "../styles/CustomTheme"; // Updated path
  * @returns {React.ReactElement} The rendered typography component.
  */
 const CustomTypographyComponent: FunctionComponent<TypographyProps> = (props) => {
-  const theme = useTheme(); // Access the theme for default values if needed
+  const theme = useCustomTheme();
 
   // Destructure custom props and pass the rest to MUI Typography
   const { strokeWidth, strokeColor, sx, ...restProps } = props;
@@ -50,9 +50,8 @@ const CustomTypographyComponent: FunctionComponent<TypographyProps> = (props) =>
 
 /**
  * @component CustomTypography
- * @description A wrapper component for CustomTypographyComponent that provides a ThemeProvider.
- * This ensures that the typography is rendered within the context of the application's theme
- * and allows usage of custom theme properties if defined in `appDeliveryTheme`.
+ * @description A wrapper component for CustomTypographyComponent that provides a CustomThemeProvider.
+ * This ensures that the typography is rendered within the context of the application's theme.
  *
  * @param {TypographyProps} props - The props for the typography component.
  * @returns {React.ReactElement} The themed typography component.
@@ -67,7 +66,7 @@ const CustomTypographyComponent: FunctionComponent<TypographyProps> = (props) =>
  * </CustomTypography>
  */
 export const CustomTypography: FunctionComponent<TypographyProps> = (props) => (
-    <ThemeProvider theme={appDeliveryTheme}>
+    <CustomThemeProvider>
         <CustomTypographyComponent {...props} />
-    </ThemeProvider>
+    </CustomThemeProvider>
 );
