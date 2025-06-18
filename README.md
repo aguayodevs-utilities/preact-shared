@@ -210,6 +210,18 @@ En `package.json` se incluyen los siguientes comandos:
 | `npm run build&install`          | Instala dependencias y construye |
 | `npm run build&install:dev`      | Instala y construye en modo desarrollo |
 | `npm run publish-preact-shared`  | Construye y publica el paquete             |
+### CLI `create-theme`
+
+Genera un archivo de tema a partir de un JSON con los colores base.
+
+```bash
+npx create-theme --basecolors baseColors.json --output myTheme.ts
+```
+
+El JSON debe incluir al menos `primary.main` y `secondary.main`. El comando
+completa los campos faltantes con valores por defecto y escribe el resultado en
+la ruta indicada.
+
 
 ## Contribución
 

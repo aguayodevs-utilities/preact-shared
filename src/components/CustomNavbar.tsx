@@ -59,15 +59,29 @@ export const CustomNavbar: React.FC<NavbarProps> = ({ environment, urlUser, urlL
             <Box display="flex" gap={2} alignItems="center">
               {user && (
                 <>
+                  
                   <CustomTypography variant="body1">
                     {`${user.name.charAt(0).toUpperCase() + user.name.slice(1)} / ${user.role.toUpperCase()}`}
                   </CustomTypography>
+                  <Avatar
+                    src={user.image}
+                    alt={`${user.name} ${user.second_name || ''}`}
+                    sx={{ width: 40, height: 40, bgcolor: appTheme.palette.secondary.main, color: appTheme.palette.secondary.contrastText }}
+                  />
+                  <CustomTypography variant="button" sx={{ cursor: 'pointer', textTransform: 'none' }} onClick={logout} data-testid="logout-button">
+                    Salir
+                  </CustomTypography>
                 </>
+              )}
+              {!user && (
+                <CustomTypography variant="button" sx={{ cursor: 'pointer', textTransform: 'none' }} onClick={() => { /* Navigate to login */ }} data-testid="login-button">
+                  Iniciar Sesión
+                </CustomTypography>
               )}
             </Box>
           )}
-          </Toolbar>
-        </AppBar>
+        </Toolbar>
+      </AppBar>
     </CustomThemeProvider>
   );
 };
