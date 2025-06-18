@@ -13,10 +13,12 @@ import { NODE_ENV_TYPE } from '../interfaces/interface.navbar'; // Assuming this
 export interface CustomLayoutProps {
   /** The content to be rendered within the layout. */
   children: ReactNode;
-  /** The current application environment (e.g., 'development', 'production').
-   * This prop might be used by CustomNavbar or other child components.
-   */
-  environment: NODE_ENV_TYPE; // Consider if this prop is actively used or can be derived from context/env variables
+  /** The current application environment (e.g., 'development', 'production'). */
+  environment: NODE_ENV_TYPE;
+  /** Optional URL for fetching user session data, passed to CustomNavbar. */
+  urlUser?: string;
+  /** Optional URL for logging out the user, passed to CustomNavbar. */
+  urlLogout?: string;
   /** Optional flag to show/hide the breadcrumb. Defaults to true. */
   showBreadcrumb?: boolean;
   /** Optional flag to show/hide the navbar. Defaults to true. */
@@ -39,16 +41,24 @@ export interface CustomLayoutProps {
  */
 export const CustomLayout: FunctionComponent<CustomLayoutProps> = ({
   children,
-  environment, // Pass environment to Navbar if needed, or Navbar can get it from context/env
+  environment,
+  urlUser,
+  urlLogout,
   showBreadcrumb = true,
   showNavbar = true,
 }) => {
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}> {/* Ensure layout takes full height */}
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <CssBaseline />
-      {showNavbar && <CustomNavbar environment={environment} />} {/* Pass environment to Navbar */}
+      {showNavbar && (
+        <CustomNavbar
+          environment={environment}
+          urlUser={urlUser}
+          urlLogout={urlLogout}
+        />
+      )}
       
-      <Container component="main" sx={{ flexGrow: 1, py: 3 }}> {/* Main content area */}
+      <Container component="main" sx={{ flexGrow: 1, py: 3 }}>
         {showBreadcrumb && <CustomBreadcrumb />}
         {children}
       </Container>
@@ -63,12 +73,8 @@ export const CustomLayout: FunctionComponent<CustomLayoutProps> = ({
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="colored" // Or "light", "dark"
+        theme="colored"
       />
-      {/* Consider adding a Footer component here if needed */}
-      {/* <Box component="footer" sx={{ py: 2, textAlign: 'center', backgroundColor: 'background.paper' }}>
-        <Typography variant="body2" color="text.secondary">© My App</Typography>
-      </Box> */}
     </Box>
   );
 };
