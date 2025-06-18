@@ -1,10 +1,10 @@
 :root {
-  --app-color-primary: #4d4d4d;
-  --app-color-secondary: #bc0303;
-  --app-color-base: #4d4d4d;
-  --app-color-background: #1e1e1e;
-  --app-color-text: #595562;
-  --app-color-text-secondary: #15323e;
+  --app-color-primary: #fa7147;
+  --app-color-secondary: #79ab53;
+  --app-color-base: #fbb89f;
+  --app-color-background: #c1c1c1;
+  --app-color-text: #fff;
+  --app-color-text-secondary: #79ab53;
   --app-color-text-error: #8f1010;
   --app-color-background-error: #dce8de;
 }
@@ -36,7 +36,7 @@ body::before {
   width: 420px;
   height: 420px;
   transform: translate(-50%, -50%);
-  background: url('img/logo.png') no-repeat center center;
+  background: url('/logo.png') no-repeat center center;
   background-size: contain;
   opacity: 0.15;
   z-index: 0;

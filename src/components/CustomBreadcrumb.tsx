@@ -1,8 +1,8 @@
-import React from 'react';
+import { FunctionComponent } from 'preact';
 import { Breadcrumbs, Link } from '@mui/material'; // Typography removed as CustomTypography is used
 import HomeIcon from '@mui/icons-material/Home';
 import { useBreadcrumbs } from '../hooks/useBreadcrumbs';
-import { appTheme } from '../styles/CustomTheme'; // Updated path
+import { appDeliveryTheme } from '../styles/CustomTheme'; // Updated path
 import { ThemeProvider } from '@mui/material/styles';
 import { CustomTypography } from './CustomTypography';
 
@@ -18,11 +18,11 @@ import { CustomTypography } from './CustomTypography';
  *   <CustomBreadcrumb />
  * )
  */
-export const CustomBreadcrumb: React.FC = () => {
-  const [crumbs, go] = useBreadcrumbs();
-
+export const CustomBreadcrumb = ({ urlLabels }: { urlLabels?: string }) => {
+  const [crumbs, go] = useBreadcrumbs(urlLabels);
+  
   return (
-    <ThemeProvider theme={appTheme}>
+    <ThemeProvider theme={appDeliveryTheme}>
       <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 2, fontSize: '24px' }}>
         <Link
           underline="hover"

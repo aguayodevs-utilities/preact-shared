@@ -3,6 +3,7 @@
     "target": "esnext",
     "module": "esnext",
     "jsx": "react-jsx",
+    "jsxImportSource": "preact",
     "lib": ["dom", "dom.iterable", "esnext"],
     "moduleResolution": "node",
     "esModuleInterop": true,
@@ -15,9 +16,12 @@
     "noEmit": true,
     "baseUrl": ".",
     "paths": {
-      "*": ["src/*"]
+      "*": ["src/*"],
+      "react":             ["../node_modules/preact/compat"],
+      "react-dom":         ["../node_modules/preact/compat"],
+      "react/jsx-runtime": ["../node_modules/preact/jsx-runtime"]
     }
   },
-  "include": ["src", "vite.config.ts"],
+  "include": ["src", "vite.config.ts", "react-shim.d.ts"],
   "exclude": ["node_modules", "dist"]
 }

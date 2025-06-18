@@ -1,5 +1,7 @@
 // src/interfaces/interface.navbar.ts
 
+import { User } from "./interface.user";
+
 /**
  * @file Defines TypeScript types and interfaces related to the Navbar component.
  */
@@ -17,23 +19,15 @@ export type NODE_ENV_TYPE = "production" | "development" | undefined;
  * @description Defines the props for the `CustomNavbar` component.
  */
 export interface NavbarProps {
-  /**
-   * The current application environment.
-   * This can be used to conditionally render elements in the navbar,
-   * for example, a "Development Mode" banner.
-   */
+  /** The current application environment. */
   environment: NODE_ENV_TYPE;
-  /**
-   * Optional URL for fetching user session data.
-   * If provided, the user session will be fetched from this endpoint.
-   * If not provided, no user session fetch will occur, and user-related components will not be displayed.
-   */
-  urlUser?: string;
-  /**
-   * Optional URL for logging out the user.
-   * If not provided, a default logout URL will be constructed based on the `urlUser` if it exists,
-   * or a generic logout path if `urlUser` is also not provided.
-   */
-  urlLogout?: string;
+  /** The authenticated user object, if logged in. */
+  user?: User;
+  /** Whether the user session is still loading. */
+  isLoading?: boolean;
+  /** Callback to log the user out. */
+  logout?: () => void;
+  urlMenu?: string;
 }
+
 

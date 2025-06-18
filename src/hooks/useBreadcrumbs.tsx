@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useState, useEffect, useCallback } from 'preact/hooks';
 
 /**
@@ -18,13 +19,7 @@ export type Crumb = { label: string; href: string; last: boolean };
 const LABELS: Record<string, string> = {
   'admin': 'Administrador',
   'client': 'Cliente',
-  'sso': 'SSO',
-  'chatbots': 'Mis Chatbots', // Consistent capitalization
-  'apps': 'Aplicaciones',
-  'welcome': 'Bienvenido',
-  'my-apps': 'Mis Aplicaciones', // Consistent capitalization
-  'edit': 'Modificar',
-  'create': 'Crear',
+  'auth': 'Autorizacion'
   // Add more specific paths or dynamic segment handlers if necessary
   // e.g., 'user-profile': 'Perfil de Usuario'
 };
@@ -44,7 +39,24 @@ const LABELS: Record<string, string> = {
  * // In your component:
  * // breadcrumbs.map(crumb => <Link onClick={() => navigate(crumb.href)}>{crumb.label}</Link>)
  */
-export function useBreadcrumbs(): [Crumb[], (href: string) => void] {
+export function useBreadcrumbs(urlLabels?: string): [Crumb[], (href: string) => void] {
+  const [mergedLabels, setMergedLabels] = useState<Record<string, string>>(LABELS);
+
+  useEffect(() => {
+    if (urlLabels) {
+      axios.get<Record<string, string>>(urlLabels)
+        .then(response => {
+          setMergedLabels({ ...LABELS, ...response.data });
+        })
+        .catch(error => {
+          console.error("Error fetching breadcrumb labels:", error);
+          setMergedLabels(LABELS); // Fallback to default labels
+        });
+    } else {
+      setMergedLabels(LABELS); // Use default if no url
+    }
+  }, [urlLabels]);
+
   /**
    * @function buildCrumbs
    * @description A memoized callback function that constructs the breadcrumb array
@@ -65,15 +77,19 @@ export function useBreadcrumbs(): [Crumb[], (href: string) => void] {
     pathSegments.forEach((segment, index) => {
       const currentPath = '/' + pathSegments.slice(0, index + 1).join('/');
       generatedCrumbs.push({
-        label: LABELS[segment] ?? decodeURIComponent(segment), // Fallback to decoded segment if no label
+        label: mergedLabels[segment] ?? decodeURIComponent(segment), // Fallback to decoded segment if no label
         href: currentPath,
         last: index === pathSegments.length - 1,
       });
     });
     return generatedCrumbs;
-  }, []);
+  }, [mergedLabels]);
 
   const [crumbs, setCrumbs] = useState<Crumb[]>(buildCrumbs);
+
+  useEffect(() => {
+    setCrumbs(buildCrumbs());
+  }, [buildCrumbs]);
 
   /**
    * @function navigateTo

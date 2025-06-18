@@ -1,7 +1,7 @@
 import React from 'react';
 import { styled, ThemeProvider } from '@mui/material/styles'; // Combined imports
 import { TextField, TextFieldProps as MuiTextFieldProps } from '@mui/material'; // Renamed to avoid conflict, removed Theme
-import { appTheme } from '../styles/CustomTheme'; // Updated path
+import { appDeliveryTheme } from '../styles/CustomTheme'; // Updated path
 
 /**
  * @type CustomTextareaProps
@@ -80,7 +80,7 @@ export const CustomTextarea: React.FC<CustomTextareaProps> = (props) => {
   } = props;
 
   return (
-    <ThemeProvider theme={appTheme}>
+    <ThemeProvider theme={appDeliveryTheme}>
       <StyledTextarea
         variant={variant}
         fullWidth={fullWidth}
