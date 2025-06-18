@@ -2,14 +2,14 @@ import React from 'react';
   import { FunctionComponent, ComponentChildren } from 'preact';
   import Box from '@mui/material/Box';
   import Modal, { ModalProps as MuiModalProps } from '@mui/material/Modal'; // Import ModalProps
-  import { appDeliveryTheme } from '../styles/CustomTheme'; // Updated path
-  import { ThemeProvider } from '@mui/material/styles';
+import { CustomThemeProvider, useCustomTheme } from '../styles/CustomThemeContext';
+import { Theme } from '@mui/material/styles';
   import { CustomTypography } from './CustomTypography';
   import CloseIcon from '@mui/icons-material/Close'; // For a close button
   import { IconButton } from '@mui/material'; // For the close button
   
   // It's better to define styles using the theme for consistency
-  const modalStyle = (theme: typeof appDeliveryTheme) => ({ // Type theme for better intellisense
+  const modalStyle = (theme: Theme) => ({
     position: 'absolute' as 'absolute', // Explicitly type position
     top: '50%',
     left: '50%',
@@ -80,10 +80,12 @@ import React from 'react';
           setOpen(false);
       };
   
+      const theme = useCustomTheme();
+
       if (!open) return null;
-  
+
       return (
-          <ThemeProvider theme={appDeliveryTheme}>
+          <CustomThemeProvider theme={theme}>
               <Modal
                   open={open}
                   onClose={handleClose}
@@ -95,7 +97,7 @@ import React from 'react';
                   disableRestoreFocus={restMuiModalProps.disableRestoreFocus ?? false}
                   {...restMuiModalProps} // Pass other MUI Modal props
               >
-                  <Box sx={modalStyle(appDeliveryTheme)}>
+                  <Box sx={modalStyle(theme)}>
                       {showCloseButton && (
                           <IconButton
                               aria-label="close modal"
@@ -122,6 +124,6 @@ import React from 'react';
                       </Box>
                   </Box>
               </Modal>
-          </ThemeProvider>
+          </CustomThemeProvider>
       );
   };

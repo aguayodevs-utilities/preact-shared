@@ -1,7 +1,7 @@
 import React from 'react';
-import { styled, ThemeProvider } from '@mui/material/styles'; // Combined imports, removed useTheme
-import { TextField, TextFieldProps as MuiTextFieldProps, Theme } from '@mui/material'; // Renamed to avoid conflict
-import { appDeliveryTheme } from '../styles/CustomTheme'; // Updated path
+import { styled } from '@mui/material/styles';
+import { TextField, TextFieldProps as MuiTextFieldProps, Theme } from '@mui/material';
+import { CustomThemeProvider, useCustomTheme } from '../styles/CustomThemeContext';
 // CustomTypography is removed as TextField itself handles text, and children are not typical for TextField
 
 /**
@@ -53,7 +53,7 @@ const StyledTextField = styled(TextField)<CustomInputProps>(({ theme }) => ({
  * @component CustomInput
  * @description A customized TextField component using Material-UI's TextField and styled-components.
  * It provides a default styling that can be overridden via props.
- * The component is wrapped with a ThemeProvider using `appDeliveryTheme`.
+ * The component is wrapped with a CustomThemeProvider using the current theme.
  *
  * @param {CustomInputProps} props - The props for the TextField component.
  * @returns {React.ReactElement} The rendered custom input field.
@@ -67,14 +67,13 @@ const StyledTextField = styled(TextField)<CustomInputProps>(({ theme }) => ({
  * />
  */
 export const CustomInput: React.FC<CustomInputProps> = (props) => {
-  // The ThemeProvider might be redundant if appDeliveryTheme is globally provided at the app's root.
-  // However, keeping it here ensures this component is self-contained with its specific theme context if needed.
+  const theme = useCustomTheme();
   
   // Apply defaults before passing to StyledTextField
   const { variant = 'outlined', fullWidth = true, ...restProps } = props;
 
   return (
-    <ThemeProvider theme={appDeliveryTheme}>
+    <CustomThemeProvider theme={theme}>
       <StyledTextField
         variant={variant}
         fullWidth={fullWidth}
@@ -82,6 +81,6 @@ export const CustomInput: React.FC<CustomInputProps> = (props) => {
         // Children are not typically passed to TextField. If they were meant for a label or helper text,
         // those should be passed via `label` or `helperText` props respectively.
       />
-    </ThemeProvider>
+    </CustomThemeProvider>
   );
 };
