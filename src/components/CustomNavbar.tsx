@@ -42,7 +42,7 @@ export const CustomNavbar: React.FC<NavbarProps> = ({ environment, urlUser, urlL
       >
         <Toolbar>
           <img
-            src="/logo.png"
+            src="static/img/logo.png"
             alt="Application Logo"
             style={{
               width: '50px',
