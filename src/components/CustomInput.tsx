@@ -1,7 +1,7 @@
 import React from 'react';
 import { styled, ThemeProvider } from '@mui/material/styles'; // Combined imports, removed useTheme
 import { TextField, TextFieldProps as MuiTextFieldProps, Theme } from '@mui/material'; // Renamed to avoid conflict
-import { appTheme } from '../styles/CustomTheme'; // Updated path
+import { appDeliveryTheme } from '../styles/CustomTheme'; // Updated path
 // CustomTypography is removed as TextField itself handles text, and children are not typical for TextField
 
 /**
@@ -53,7 +53,7 @@ const StyledTextField = styled(TextField)<CustomInputProps>(({ theme }) => ({
  * @component CustomInput
  * @description A customized TextField component using Material-UI's TextField and styled-components.
  * It provides a default styling that can be overridden via props.
- * The component is wrapped with a ThemeProvider using `appTheme`.
+ * The component is wrapped with a ThemeProvider using `appDeliveryTheme`.
  *
  * @param {CustomInputProps} props - The props for the TextField component.
  * @returns {React.ReactElement} The rendered custom input field.
@@ -67,14 +67,14 @@ const StyledTextField = styled(TextField)<CustomInputProps>(({ theme }) => ({
  * />
  */
 export const CustomInput: React.FC<CustomInputProps> = (props) => {
-  // The ThemeProvider might be redundant if appTheme is globally provided at the app's root.
+  // The ThemeProvider might be redundant if appDeliveryTheme is globally provided at the app's root.
   // However, keeping it here ensures this component is self-contained with its specific theme context if needed.
   
   // Apply defaults before passing to StyledTextField
   const { variant = 'outlined', fullWidth = true, ...restProps } = props;
 
   return (
-    <ThemeProvider theme={appTheme}>
+    <ThemeProvider theme={appDeliveryTheme}>
       <StyledTextField
         variant={variant}
         fullWidth={fullWidth}
