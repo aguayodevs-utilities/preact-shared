@@ -18,7 +18,26 @@ export interface UseUserSessionProps {
   urlLogout?: string;
 }
 
-// Hook principal
+/**
+ * @function useUserSession
+ * @description A Preact hook to manage and retrieve the current user's session information.
+ * It fetches the user session from a specified endpoint on mount and provides user data,
+ * a logout function, loading state, and error state. If `sessionEndpointUrl` is not provided,
+ * no session fetch will occur.
+ *
+ * @param {UseUserSessionProps} [props] - Props for the hook, including session and logout URLs.
+ * @returns {UseUserSessionReturn} An object containing the user, logout function, loading state, and error state.
+ *
+ * @example
+ * // With custom session and logout URLs
+ * const { user, logout, isLoading, error } = useUserSession({
+ *   sessionEndpointUrl: '/auth/session',
+ *   urlLogout: '/auth/logout'
+ * });
+ *
+ * // Without session fetching (e.g., for public pages)
+ * const { user, logout, isLoading, error } = useUserSession();
+ */
 export const useUserSession = ({ sessionEndpointUrl, urlLogout }: UseUserSessionProps = {}): UseUserSessionReturn => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
