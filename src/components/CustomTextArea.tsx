@@ -1,4 +1,4 @@
-import React from 'react';
+import { FunctionComponent } from 'preact';
 import { styled, ThemeProvider } from '@mui/material/styles'; // Combined imports
 import { TextField, TextFieldProps as MuiTextFieldProps } from '@mui/material'; // Renamed to avoid conflict, removed Theme
 import { appDeliveryTheme } from '../styles/CustomTheme'; // Updated path
@@ -69,7 +69,7 @@ const StyledTextarea = styled(TextField)<CustomTextareaProps>(({ theme }) => ({
  *   fullWidth
  * />
  */
-export const CustomTextarea: React.FC<CustomTextareaProps> = (props) => {
+export const CustomTextarea: FunctionComponent<CustomTextareaProps> = (props) => {
   // Apply defaults before passing to StyledTextarea
   const {
     variant = 'outlined',
